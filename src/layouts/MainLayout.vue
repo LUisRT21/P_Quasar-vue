@@ -36,7 +36,7 @@ import { ref } from 'vue';
 export default {
   setup(props) {
     const leftDrawerOpen = ref(false);
-    const value = ref(true);
+    const value = ref(false);
 
     const toggleLeftDrawer = () => {
       leftDrawerOpen.value = !leftDrawerOpen.value;
