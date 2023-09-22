@@ -17,6 +17,10 @@
           <q-btn flat round dense icon="search" />
         </q-toolbar>
         <q-toolbar class="col-4 bg-secondary text-accent">
+          <div class="q-pa-md q-gutter-sm">
+            <q-btn color="primary" label="Inicio" />
+            <q-btn color="primary" label="Estadísticas" />
+          </div>
           <q-space />
           <q-btn
             flat
