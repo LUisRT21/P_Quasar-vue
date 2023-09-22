@@ -2,8 +2,31 @@
   <q-layout view="hHh lpR fFf">
     <q-header elevated class="bg-primary text-white">
       <q-toolbar>
-        <q-btn dense flat round icon="ion-md-menu" @click="toggleLeftDrawer" />
-        <q-toolbar-title>Tienda CellPhone</q-toolbar-title>
+        <q-toolbar
+          class="col-8"
+          :class="$q.dark.isActive ? 'primary text-accent' : 'secondary'"
+        >
+          <q-btn
+            dense
+            flat
+            round
+            icon="ion-md-menu"
+            @click="toggleLeftDrawer"
+          />
+          <q-toolbar-title>Tienda CellPhone</q-toolbar-title>
+          <q-btn flat round dense icon="search" />
+        </q-toolbar>
+        <q-toolbar class="col-4 bg-secondary text-accent">
+          <q-space />
+          <q-btn
+            flat
+            round
+            dense
+            icon="ion-add-circle-outline"
+            class="q-mr-sm"
+          />
+          <q-btn flat round dense icon="ion-cart" />
+        </q-toolbar>
       </q-toolbar>
     </q-header>
 
