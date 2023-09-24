@@ -14,8 +14,28 @@
             @click="toggleLeftDrawer"
           />
           <q-toolbar-title>Tienda CellPhone</q-toolbar-title>
-          <q-btn flat round dense icon="search" />
+          <q-space />
+          <q-input
+            dark
+            dense
+            standout
+            rounded
+            v-model="text"
+            input-class="text-left"
+            class="q-ml-md"
+          >
+            <template v-slot:append>
+              <q-icon v-if="text === ''" name="search" />
+              <q-icon
+                v-else
+                name="clear"
+                class="cursor-pointer"
+                @click="text = ''"
+              />
+            </template>
+          </q-input>
         </q-toolbar>
+
         <q-toolbar class="col-4 bg-secondary text-accent">
           <div class="q-pa-md q-gutter-sm">
             <q-btn color="primary" label="Inicio" />
@@ -29,7 +49,9 @@
             icon="ion-add-circle-outline"
             class="q-mr-sm"
           />
-          <q-btn flat round dense icon="ion-cart" />
+          <q-btn flat round dense icon="ion-cart">
+            <q-badge color="primary" floating>4</q-badge>
+          </q-btn>
         </q-toolbar>
       </q-toolbar>
     </q-header>
