@@ -172,15 +172,15 @@ export default {
     const opcionesGrupo3 = [
       {
         label: '6.0',
-        value: 'op6',
+        value: 'op9',
       },
       {
         label: '5.5',
-        value: 'op7',
+        value: 'op10',
       },
       {
         label: '5',
-        value: 'op8',
+        value: 'op11',
       },
     ];
 
