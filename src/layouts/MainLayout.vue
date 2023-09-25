@@ -66,7 +66,7 @@
           <div class="text-h6">Marca</div>
           <div class="q-pa-lg">
             <q-option-group
-              v-model="group1"
+              v-model="grupo1"
               :options="opcionesGrupo1"
               color="secondary"
               type="checkbox"
@@ -78,7 +78,7 @@
           <div class="text-h6">Sistema</div>
           <div class="q-pa-lg">
             <q-option-group
-              v-model="group2"
+              v-model="grupo2"
               :options="opcionesGrupo2"
               color="primary"
               type="checkbox"
@@ -90,7 +90,7 @@
           <div class="text-h6">Pantalla</div>
           <div class="q-pa-lg">
             <q-option-group
-              v-model="group2"
+              v-model="grupo3"
               :options="opcionesGrupo3"
               color="secondary"
               type="checkbox"
@@ -128,8 +128,8 @@ export default {
       leftDrawerOpen.value = !leftDrawerOpen.value;
     };
 
-    const group1 = ref([]); //Grupo 1
-    const group2 = ref([]); // Grupo 2
+    const grupo1 = ref([]); //Grupo 1
+    const grupo2 = ref([]); // Grupo 2
     const grupo3 = ref([]); //Grupo 3
     const opcionesGrupo1 = [
       {
@@ -188,8 +188,8 @@ export default {
       leftDrawerOpen,
       value,
       toggleLeftDrawer,
-      group1, // Incluye el primer grupo
-      group2, // Incluye el segundo grupo
+      grupo1, // Incluye el primer grupo
+      grupo2, // Incluye el segundo grupo
       grupo3, // Incluye el tercer grupo
       opcionesGrupo1, // Incluye las opciones del primer grupo
       opcionesGrupo2, // Incluye las opciones del segundo grupo
