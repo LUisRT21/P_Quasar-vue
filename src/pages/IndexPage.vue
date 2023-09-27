@@ -1,23 +1,24 @@
 <template>
   <q-page class="row items-center justify-evenly">
     <div class="q-pa-md row items-start q-gutter-md">
-      <div class="q-pa-md column items-center justify-center full-height">
-        <q-card class="my-card" style="max-width: 100%" bordered>
-          <q-card-section horizontal>
-            <q-card-section>
-              <label class="q-ma-xd">Desde:</label>
-            </q-card-section>
-            <q-separator vertical />
-            <q-card-section class="col-5 flex flex-center">
-              <q-input
-                color="primary"
-                outlined
-                v-model="text"
-                prefix="$"
-                class="q-pa-md"
-                style="width: 90px; height: 10px"
-              />
-            </q-card-section>
+      <div class="q-mx-auto text-h6">
+        <q-card>
+          <q-card-section class="q-gutter-md">
+            <q-form>
+              <q-card-section horizontal>
+                <q-card-section>
+                  <q-input
+                    prefix="$"
+                    label="Precio:"
+                    v-model="precio"
+                    outlined
+                  />
+                </q-card-section>
+                <q-card-section>
+                  <q-input prefix="$" label="hasta:" v-model="hasta" outlined />
+                </q-card-section>
+              </q-card-section>
+            </q-form>
           </q-card-section>
         </q-card>
       </div>
@@ -152,6 +153,12 @@ export default defineComponent({
     ];
 
     return { text, phones };
+  },
+  data() {
+    return {
+      precio: '',
+      hasta: '',
+    };
   },
 });
 </script>
