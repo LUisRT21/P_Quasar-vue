@@ -1,8 +1,6 @@
 <template>
   <q-page class="row items-center justify-evenly">
     <div class="q-pa-md row items-start q-gutter-md">
-      <q-card-section><q-icon name="ion-ios-home" /></q-card-section>
-
       <div class="q-pa-md column items-center justify-center full-height">
         <q-card class="my-card" style="max-width: 100%" bordered>
           <q-card-section horizontal>
@@ -29,25 +27,22 @@
         <q-card
           v-for="(phone, index) in phones"
           :key="index"
-          style="max-width: 100%"
+          class="card hover-grow"
           direction="row"
         >
           <!-- Imagen de la tarjeta -->
           <q-card-section>
             <q-img
               :src="phone.imagenURL"
-              :alt="phone.modelo"
               class="q-pa-md"
               border="2px solid black"
             />
           </q-card-section>
           <!-- Contenido de la tarjeta -->
-          <q-card-section>
+          <q-card-section class="card-content">
             <p class="text-weight-bold">Precio: ${{ phone.precio }}</p>
-            <p>{{ phone.modelo }}</p>
+            <p class="q-mb-sm">{{ phone.modelo }}</p>
             <!-- Accion de la tarrjeta -->
-            <q-btn color="primary" label="Ver detalles" />
-            <q-btn color="secondary" icon="ion-cart" />
           </q-card-section>
         </q-card>
       </div>
