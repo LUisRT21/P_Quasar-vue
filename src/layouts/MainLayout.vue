@@ -57,7 +57,13 @@
     </q-header>
 
     <!-- Elementos en la opción para filtrar los telefonos -->
-    <q-drawer v-model="leftDrawerOpen" side="left" overlay bordered scrollable>
+    <q-drawer
+      show-if-above
+      v-model="leftDrawerOpen"
+      side="left"
+      bordered
+      scrollable
+    >
       <div class="q-pa-md q-gutter-lg">
         <q-toggle v-model="value" color="primary" label="Nuevo" />
       </div>
