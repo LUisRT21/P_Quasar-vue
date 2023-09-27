@@ -1,28 +1,37 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    <div class="q-pa-md row items-start q-gutter-md">
-      <div class="q-mx-auto text-h6">
-        <q-card>
-          <q-card-section class="q-gutter-md">
-            <q-form>
+    <q-card>
+      <q-card-section>
+        <q-card-section>
+          <q-form>
+            <q-card-section horizontal>
+              <q-card-section>
+                <q-input prefix="$" label="Precio:" v-model="precio" outlined />
+              </q-card-section>
+              <q-card-section>
+                <q-input prefix="$" label="hasta:" v-model="hasta" outlined />
+              </q-card-section>
               <q-card-section horizontal>
                 <q-card-section>
-                  <q-input
-                    prefix="$"
-                    label="Precio:"
-                    v-model="precio"
-                    outlined
-                  />
+                  <div class="text-h6">Ordenar por:</div>
                 </q-card-section>
                 <q-card-section>
-                  <q-input prefix="$" label="hasta:" v-model="hasta" outlined />
+                  <div class="q-gutter-sm">
+                    <q-btn color="primary">
+                      <q-icon left size="2em" name="ion-arrow-up" />
+                      <div>Precio</div>
+                    </q-btn>
+                    <q-btn color="primary" label="Fecha" />
+                  </div>
                 </q-card-section>
               </q-card-section>
-            </q-form>
-          </q-card-section>
-        </q-card>
-      </div>
+            </q-card-section>
+          </q-form>
+        </q-card-section>
+      </q-card-section>
+    </q-card>
 
+    <div class="q-pa-md row items-start q-gutter-md">
       <router-view />
       <div class="container">
         <q-card
