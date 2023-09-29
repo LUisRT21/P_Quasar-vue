@@ -1,5 +1,5 @@
 <template>
-  <q-page class="row items-center justify-evenly">
+  <q-page class="row items-center justify-evenly accent">
     <q-card>
       <q-card-section>
         <q-card-section>
@@ -30,23 +30,16 @@
         </q-card-section>
       </q-card-section>
     </q-card>
-
     <div class="q-pa-md row items-start q-gutter-md">
-      <router-view />
       <div class="container">
         <q-card
           v-for="(phone, index) in phones"
           :key="index"
           class="card hover-grow"
-          direction="row"
         >
           <!-- Imagen de la tarjeta -->
           <q-card-section>
-            <q-img
-              :src="phone.imagenURL"
-              class="q-pa-md"
-              border="2px solid black"
-            />
+            <q-img :src="phone.imagenURL" class="q-pa-md" />
           </q-card-section>
           <!-- Contenido de la tarjeta -->
           <q-card-section class="card-content">
@@ -57,6 +50,7 @@
         </q-card>
       </div>
     </div>
+    <router-view />
   </q-page>
 </template>
 
@@ -160,7 +154,6 @@ export default defineComponent({
         ram: 6,
       },
     ];
-
     return { text, phones };
   },
   data() {
