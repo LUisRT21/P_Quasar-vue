@@ -57,52 +57,48 @@
     </q-header>
 
     <!-- Elementos en la opción para filtrar los telefonos -->
-    <q-drawer
-      show-if-above
-      v-model="leftDrawerOpen"
-      side="left"
-      bordered
-      scrollable
-    >
-      <div class="q-pa-md q-gutter-lg">
-        <q-toggle v-model="value" color="primary" label="Nuevo" />
+    <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered>
+      <div>
+        <div class="q-pa-md q-gutter-lg">
+          <q-toggle v-model="value" color="primary" label="Nuevo" />
+        </div>
+        <q-card class="my-card">
+          <q-card-section>
+            <div class="text-h6">Marca</div>
+            <div class="q-pa-lg">
+              <q-option-group
+                v-model="group1"
+                :options="opcionesGrupo1"
+                color="secondary"
+                type="checkbox"
+              ></q-option-group></div
+          ></q-card-section>
+        </q-card>
+        <q-card class="my-card">
+          <q-card-section>
+            <div class="text-h6">Sistema</div>
+            <div class="q-pa-lg">
+              <q-option-group
+                v-model="group2"
+                :options="opcionesGrupo2"
+                color="primary"
+                type="checkbox"
+              ></q-option-group></div
+          ></q-card-section>
+        </q-card>
+        <q-card class="my-card">
+          <q-card-section>
+            <div class="text-h6">Pantalla</div>
+            <div class="q-pa-lg">
+              <q-option-group
+                v-model="grupo3"
+                :options="opcionesGrupo3"
+                color="secondary"
+                type="checkbox"
+              ></q-option-group></div
+          ></q-card-section>
+        </q-card>
       </div>
-      <q-card class="my-card">
-        <q-card-section>
-          <div class="text-h6">Marca</div>
-          <div class="q-pa-lg">
-            <q-option-group
-              v-model="group1"
-              :options="opcionesGrupo1"
-              color="secondary"
-              type="checkbox"
-            ></q-option-group></div
-        ></q-card-section>
-      </q-card>
-      <q-card class="my-card">
-        <q-card-section>
-          <div class="text-h6">Sistema</div>
-          <div class="q-pa-lg">
-            <q-option-group
-              v-model="group2"
-              :options="opcionesGrupo2"
-              color="primary"
-              type="checkbox"
-            ></q-option-group></div
-        ></q-card-section>
-      </q-card>
-      <q-card class="my-card">
-        <q-card-section>
-          <div class="text-h6">Pantalla</div>
-          <div class="q-pa-lg">
-            <q-option-group
-              v-model="group2"
-              :options="opcionesGrupo3"
-              color="secondary"
-              type="checkbox"
-            ></q-option-group></div
-        ></q-card-section>
-      </q-card>
     </q-drawer>
 
     <q-page-container>
