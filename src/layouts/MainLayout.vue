@@ -63,6 +63,7 @@
       side="left"
       bordered
       scrollable
+      class="accent"
     >
       <div class="q-pa-md q-gutter-lg">
         <q-toggle v-model="value" color="primary" label="Nuevo" />
@@ -113,12 +114,7 @@
       <router-view />
     </q-main>
 
-    <q-footer>
-      <q-toolbar>
-        <q-btn flat icon="info" to="/about" />
-        <q-btn flat icon="contact" to="/contact" />
-      </q-toolbar>
-    </q-footer>
+    <q-footer> </q-footer>
   </q-layout>
 </template>
 
