@@ -36,6 +36,7 @@
           v-for="(phone, index) in phones"
           :key="index"
           class="card hover-grow"
+          @click="openDialog(index)"
         >
           <!-- Imagen de la tarjeta -->
           <q-card-section>
@@ -50,6 +51,33 @@
         </q-card>
       </div>
     </div>
+    <q-dialog v-model="dialogOpen">
+      <q-card class="informacion-card">
+        <q-card-actions>
+          <q-btn
+            class="boton-cerrar"
+            color="primary"
+            @click="dialogOpen = false"
+          >
+            <q-icon items-center size="2em" name="ion-close" />
+          </q-btn>
+        </q-card-actions>
+        <q-card-section v-for="(phone, index) in phones" :key="index">
+          <!-- Verificar si selectedPhoneIndex no es null antes de mostrar la información -->
+          <template v-if="selectedPhoneIndex !== null">
+            <div>
+              <q-img :src="phone.imagenURL" class="q-pa-md" />
+            </div>
+            <p class="text-weight-bold">
+              Precio: ${{ phones[selectedPhoneIndex].precio }}
+            </p>
+            <p class="q-mb-sm">{{ phones[selectedPhoneIndex].modelo }}</p>
+            <!-- Otros detalles de la tarjeta -->
+          </template>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+
     <router-view />
   </q-page>
 </template>
@@ -154,7 +182,13 @@ export default defineComponent({
         ram: 6,
       },
     ];
-    return { text, phones };
+    const dialogOpen = ref(false);
+    const selectedPhoneIndex = ref<number | null>(null);
+    const openDialog = (index: number) => {
+      selectedPhoneIndex.value = index;
+      dialogOpen.value = true;
+    };
+    return { text, phones, dialogOpen, selectedPhoneIndex, openDialog };
   },
   data() {
     return {
