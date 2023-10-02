@@ -62,11 +62,14 @@
             <q-icon items-center size="2em" name="ion-close" />
           </q-btn>
         </q-card-actions>
-        <q-card-section v-for="(phone, index) in phones" :key="index">
+        <q-card-section>
           <!-- Verificar si selectedPhoneIndex no es null antes de mostrar la información -->
           <template v-if="selectedPhoneIndex !== null">
             <div>
-              <q-img :src="phone.imagenURL" class="q-pa-md" />
+              <q-img
+                :src="phones[selectedPhoneIndex].imagenURL"
+                class="q-pa-md"
+              />
             </div>
             <p class="text-weight-bold">
               Precio: ${{ phones[selectedPhoneIndex].precio }}
@@ -82,119 +85,113 @@
   </q-page>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-
-export default defineComponent({
-  name: 'IndexPage',
-
-  setup() {
-    const text = ref('');
-    const phones = [
-      {
-        modelo: 'iPhone 14 Pro Max',
-        imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
-        precio: 1299,
-        os: 'iOS 16',
-        Tamaño: 6.7,
-        Almacenamiento: 128,
-        ram: 6,
-      },
-      {
-        modelo: 'Samsung Galaxy S23 Ultra',
-        imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
-        precio: 1199,
-        os: 'Android 13',
-        Tamaño: 6.8,
-        Almacenamiento: 256,
-        ram: 8,
-      },
-      {
-        modelo: 'Google Pixel 7 Pro',
-        imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
-        precio: 899,
-        os: 'Android 13',
-        Tamaño: 6.7,
-        Almacenamiento: 128,
-        ram: 12,
-      },
-      {
-        modelo: 'OnePlus 9T',
-        imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
-        precio: 799,
-        os: 'OxygenOS 12',
-        Tamaño: 6.55,
-        Almacenamiento: 256,
-        ram: 8,
-      },
-      {
-        modelo: 'Xiaomi Mi 12',
-        imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
-        precio: 899,
-        os: 'MIUI 14',
-        Tamaño: 6.8,
-        Almacenamiento: 128,
-        ram: 10,
-      },
-      {
-        modelo: 'Sony Xperia 5 III',
-        imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
-        precio: 999,
-        os: 'Android 13',
-        Tamaño: 6.1,
-        Almacenamiento: 128,
-        ram: 8,
-      },
-      {
-        modelo: 'LG G9 ThinQ',
-        imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
-        precio: 749,
-        os: 'Android 12',
-        Tamaño: 6.4,
-        Almacenamiento: 256,
-        ram: 6,
-      },
-      {
-        modelo: 'Huawei P50 Pro',
-        imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
-        precio: 1099,
-        os: 'HarmonyOS 3.0',
-        Tamaño: 6.6,
-        Almacenamiento: 512,
-        ram: 8,
-      },
-      {
-        modelo: 'Motorola Moto G7',
-        imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
-        precio: 249,
-        os: 'Android 11',
-        Tamaño: 6.2,
-        Almacenamiento: 64,
-        ram: 4,
-      },
-      {
-        modelo: 'Nokia 9 PureView',
-        imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
-        precio: 599,
-        os: 'Android 10',
-        Tamaño: 5.99,
-        Almacenamiento: 128,
-        ram: 6,
-      },
-    ];
-    const dialogOpen = ref(false);
-    const selectedPhoneIndex = ref<number | null>(null);
-    const openDialog = (index: number) => {
-      selectedPhoneIndex.value = index;
-      dialogOpen.value = true;
-    };
-    return { text, phones, dialogOpen, selectedPhoneIndex, openDialog };
-  },
+<script>
+export default {
   data() {
     return {
       precio: '',
       hasta: '',
+      phones: [
+        {
+          modelo: 'iPhone 14 Pro Max',
+          imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
+          precio: 1299,
+          os: 'iOS 16',
+          Tamaño: 6.7,
+          Almacenamiento: 128,
+          ram: 6,
+        },
+        {
+          modelo: 'Samsung Galaxy S23 Ultra',
+          imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
+          precio: 1199,
+          os: 'Android 13',
+          Tamaño: 6.8,
+          Almacenamiento: 256,
+          ram: 8,
+        },
+        {
+          modelo: 'Google Pixel 7 Pro',
+          imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
+          precio: 899,
+          os: 'Android 13',
+          Tamaño: 6.7,
+          Almacenamiento: 128,
+          ram: 12,
+        },
+        {
+          modelo: 'OnePlus 9T',
+          imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
+          precio: 799,
+          os: 'OxygenOS 12',
+          Tamaño: 6.55,
+          Almacenamiento: 256,
+          ram: 8,
+        },
+        {
+          modelo: 'Xiaomi Mi 12',
+          imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
+          precio: 899,
+          os: 'MIUI 14',
+          Tamaño: 6.8,
+          Almacenamiento: 128,
+          ram: 10,
+        },
+        {
+          modelo: 'Sony Xperia 5 III',
+          imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
+          precio: 999,
+          os: 'Android 13',
+          Tamaño: 6.1,
+          Almacenamiento: 128,
+          ram: 8,
+        },
+        {
+          modelo: 'LG G9 ThinQ',
+          imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
+          precio: 749,
+          os: 'Android 12',
+          Tamaño: 6.4,
+          Almacenamiento: 256,
+          ram: 6,
+        },
+        {
+          modelo: 'Huawei P50 Pro',
+          imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
+          precio: 1099,
+          os: 'HarmonyOS 3.0',
+          Tamaño: 6.6,
+          Almacenamiento: 512,
+          ram: 8,
+        },
+        {
+          modelo: 'Motorola Moto G7',
+          imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
+          precio: 249,
+          os: 'Android 11',
+          Tamaño: 6.2,
+          Almacenamiento: 64,
+          ram: 4,
+        },
+        {
+          modelo: 'Nokia 9 PureView',
+          imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
+          precio: 599,
+          os: 'Android 10',
+          Tamaño: 5.99,
+          Almacenamiento: 128,
+          ram: 6,
+        },
+      ],
+      dialogOpen: false,
+      selectedPhoneIndex: null,
     };
   },
-});
+  methods: {
+    openDialog(index) {
+      this.selectedPhoneIndex = index;
+      this.dialogOpen = true;
+    },
+  },
+};
 </script>
