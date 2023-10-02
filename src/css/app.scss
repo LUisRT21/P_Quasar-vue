@@ -32,3 +32,21 @@
   justify-content: space-between;
   align-items: center;
 }
+.informacion-card {
+  width: 800px;
+  height: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffdfff;
+  border: 1px solid black;
+}
+.boton-cerrar {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 2px;
+  height: 2px;
+}
