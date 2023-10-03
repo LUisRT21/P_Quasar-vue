@@ -40,7 +40,7 @@
         >
           <!-- Imagen de la tarjeta -->
           <q-card-section>
-            <q-img :src="phone.imagenURL" class="q-pa-md" />
+            <q-img :src="phone.imagen" class="q-pa-md" />
           </q-card-section>
           <!-- Contenido de la tarjeta -->
           <q-card-section class="card-content">
@@ -54,28 +54,67 @@
     <q-dialog v-model="dialogOpen">
       <q-card class="informacion-card">
         <q-card-actions>
-          <q-btn
-            class="boton-cerrar"
-            color="primary"
-            @click="dialogOpen = false"
-          >
-            <q-icon items-center size="2em" name="ion-close" />
-          </q-btn>
+          <div class="q-btn-group">
+            <q-btn
+              class="boton-cerrar"
+              color="primary"
+              @click="dialogOpen = false"
+            >
+              <q-icon items-center size="2em" name="ion-close" />
+            </q-btn>
+
+            <q-btn
+              class="boton-carrito"
+              color="primary"
+              @click="agregarAlCarrito()"
+            >
+              <q-icon name="ion-cart" />
+            </q-btn>
+          </div>
         </q-card-actions>
         <q-card-section>
-          <!-- Verificar si selectedPhoneIndex no es null antes de mostrar la información -->
           <template v-if="selectedPhoneIndex !== null">
             <div>
               <q-img
-                :src="phones[selectedPhoneIndex].imagenURL"
-                class="q-pa-md"
-              />
+                :src="phones[selectedPhoneIndex].imagen"
+                class="card-extra"
+                flex="col"
+              >
+                <q-list class="caracteristicas-verticales">
+                  <q-list-item>
+                    <q-icon name="money" />
+                    <q-label>${{ phones[selectedPhoneIndex].precio }}</q-label>
+                  </q-list-item>
+                  <q-list-item>
+                    <q-icon name="phone" />
+                    <q-label>{{ phones[selectedPhoneIndex].modelo }}</q-label>
+                  </q-list-item>
+                  <q-list-item>
+                    <q-icon name="tv" />
+                    <q-label
+                      >{{ phones[selectedPhoneIndex].Tamaño }} Pulgadas</q-label
+                    >
+                  </q-list-item>
+                  <q-list-item>
+                    <q-icon name="server" />
+                    <q-label
+                      >{{ phones[selectedPhoneIndex].Almacenamiento }} memoria
+                      interna</q-label
+                    >
+                  </q-list-item>
+                  <q-list-item>
+                    <q-icon name="memory" />
+                    <q-label
+                      >{{ phones[selectedPhoneIndex].ram }} memoria ram</q-label
+                    >
+                  </q-list-item>
+                  <q-list-item>
+                    <q-icon name="code" />
+                    <q-label>{{ phones[selectedPhoneIndex].os }}</q-label>
+                  </q-list-item>
+                </q-list>
+              </q-img>
             </div>
-            <p class="text-weight-bold">
-              Precio: ${{ phones[selectedPhoneIndex].precio }}
-            </p>
-            <p class="q-mb-sm">{{ phones[selectedPhoneIndex].modelo }}</p>
-            <!-- Otros detalles de la tarjeta -->
           </template>
         </q-card-section>
       </q-card>
@@ -94,7 +133,7 @@ export default {
       phones: [
         {
           modelo: 'iPhone 14 Pro Max',
-          imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
+          imagen: 'https://cdn.quasar.dev/img/parallax2.jpg',
           precio: 1299,
           os: 'iOS 16',
           Tamaño: 6.7,
@@ -103,7 +142,7 @@ export default {
         },
         {
           modelo: 'Samsung Galaxy S23 Ultra',
-          imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
+          imagen: 'https://cdn.quasar.dev/img/parallax2.jpg',
           precio: 1199,
           os: 'Android 13',
           Tamaño: 6.8,
@@ -112,7 +151,7 @@ export default {
         },
         {
           modelo: 'Google Pixel 7 Pro',
-          imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
+          imagen: 'https://cdn.quasar.dev/img/parallax2.jpg',
           precio: 899,
           os: 'Android 13',
           Tamaño: 6.7,
@@ -121,7 +160,7 @@ export default {
         },
         {
           modelo: 'OnePlus 9T',
-          imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
+          imagen: 'https://cdn.quasar.dev/img/parallax2.jpg',
           precio: 799,
           os: 'OxygenOS 12',
           Tamaño: 6.55,
@@ -130,7 +169,7 @@ export default {
         },
         {
           modelo: 'Xiaomi Mi 12',
-          imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
+          imagen: 'https://cdn.quasar.dev/img/parallax2.jpg',
           precio: 899,
           os: 'MIUI 14',
           Tamaño: 6.8,
@@ -139,7 +178,7 @@ export default {
         },
         {
           modelo: 'Sony Xperia 5 III',
-          imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
+          imagen: 'https://cdn.quasar.dev/img/parallax2.jpg',
           precio: 999,
           os: 'Android 13',
           Tamaño: 6.1,
@@ -148,7 +187,7 @@ export default {
         },
         {
           modelo: 'LG G9 ThinQ',
-          imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
+          imagen: 'https://cdn.quasar.dev/img/parallax2.jpg',
           precio: 749,
           os: 'Android 12',
           Tamaño: 6.4,
@@ -157,7 +196,7 @@ export default {
         },
         {
           modelo: 'Huawei P50 Pro',
-          imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
+          imagen: 'https://cdn.quasar.dev/img/parallax2.jpg',
           precio: 1099,
           os: 'HarmonyOS 3.0',
           Tamaño: 6.6,
@@ -166,7 +205,7 @@ export default {
         },
         {
           modelo: 'Motorola Moto G7',
-          imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
+          imagen: 'https://cdn.quasar.dev/img/parallax2.jpg',
           precio: 249,
           os: 'Android 11',
           Tamaño: 6.2,
@@ -175,7 +214,7 @@ export default {
         },
         {
           modelo: 'Nokia 9 PureView',
-          imagenURL: 'https://cdn.quasar.dev/img/parallax2.jpg',
+          imagen: 'https://cdn.quasar.dev/img/parallax2.jpg',
           precio: 599,
           os: 'Android 10',
           Tamaño: 5.99,
