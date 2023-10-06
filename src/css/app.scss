@@ -73,3 +73,7 @@
   border: none;
   cursor: pointer;
 }
+.q-page {
+  overflow-y: auto; //Scroll de IndexPage
+  max-height: calc(100vh - 56px);
+}
