@@ -59,11 +59,11 @@
     <!-- Elementos en la opción para filtrar los telefonos -->
     <q-drawer
       show-if-above
-      v-model="leftDrawerOpen"
+      v-model="drawer"
       side="left"
       bordered
-      scrollable
       class="accent"
+      :breakpoint="500"
     >
       <q-scroll-area class="fit">
         <div class="q-pa-md q-gutter-lg">
@@ -121,11 +121,11 @@ import { ref } from 'vue';
 
 export default {
   setup(props) {
-    const leftDrawerOpen = ref(false);
+    const drawer = ref(false);
     const value = ref(false);
 
     const toggleLeftDrawer = () => {
-      leftDrawerOpen.value = !leftDrawerOpen.value;
+      drawer.value = !drawer.value;
     };
 
     const group1 = ref([]); //Grupo 1
@@ -185,7 +185,7 @@ export default {
     ];
 
     return {
-      leftDrawerOpen,
+      drawer,
       value,
       toggleLeftDrawer,
       group1, // Incluye el primer grupo
