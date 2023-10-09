@@ -50,27 +50,16 @@
               <q-icon name="phone" />
               <q-label>{{ phone.modelo }}</q-label>
             </q-list-item>
-            <q-list-item>
-              <q-icon name="tv" />
-              <q-label>{{ phone.Tamaño }} Pulgadas</q-label>
-            </q-list-item>
-            <q-list-item>
-              <q-icon name="server" />
-              <q-label>{{ phone.Almacenamiento }} memoria interna</q-label>
-            </q-list-item>
-            <q-list-item>
-              <q-icon name="memory" />
-              <q-label>{{ phone.ram }} memoria ram</q-label>
-            </q-list-item>
           </q-list>
-
           <p class="text-h6 text-weight-bold">${{ phone.precio }}</p>
-          <q-btn
-            color="primary"
-            label="Añadir al carrito"
-            align="center"
-          ></q-btn>
           <!-- Accion de la tarrjeta -->
+          <q-card-section>
+            <q-btn
+              color="primary"
+              label="Añadir al carrito"
+              class="q-ma-xs"
+            ></q-btn>
+          </q-card-section>
         </q-card-section>
       </q-card>
     </div>
