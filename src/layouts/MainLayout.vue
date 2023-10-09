@@ -63,7 +63,6 @@
       side="left"
       bordered
       class="accent"
-      :breakpoint="500"
     >
       <q-scroll-area class="fit">
         <div class="q-pa-md q-gutter-lg">

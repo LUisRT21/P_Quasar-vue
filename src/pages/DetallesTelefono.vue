@@ -20,7 +20,7 @@ export default {
   },
   created() {
     // Obtener el índice del teléfono de la URL
-    const phoneIndex = parseInt(this.$route.params.index);
+    const phoneIndex = parseInt(this.$route.params.telefono);
 
     // Verificar si el índice es válido
     if (
