@@ -36,49 +36,48 @@
         :key="index"
         v-ripple
         class="q-card q-mb-xs col-12 col-sm-6 col-md-3 col-lg-2 my-box cursor-pointer q-hoverable"
+        @click="VerDetalles(index)"
       >
         <span class="q-focus-helper"></span>
         <!-- Imagen de la tarjeta -->
         <q-card-section>
-          <q-img :src="phone.imagen" class="q-pa-md">
-            <q-list class="caracteristicas-verticales">
-              <q-list-item>
-                <q-icon name="money" />
-                <q-label>${{ phone.precio }}</q-label>
-              </q-list-item>
-              <q-list-item>
-                <q-icon name="phone" />
-                <q-label>{{ phone.modelo }}</q-label>
-              </q-list-item>
-              <q-list-item>
-                <q-icon name="tv" />
-                <q-label>{{ phone.Tamaño }} Pulgadas</q-label>
-              </q-list-item>
-              <q-list-item>
-                <q-icon name="server" />
-                <q-label>{{ phone.Almacenamiento }} memoria interna</q-label>
-              </q-list-item>
-              <q-list-item>
-                <q-icon name="memory" />
-                <q-label>{{ phone.ram }} memoria ram</q-label>
-              </q-list-item>
-              <q-list-item>
-                <q-icon name="code" />
-                <q-label>{{ phone.os }}</q-label>
-              </q-list-item>
-            </q-list>
-          </q-img>
+          <q-img :src="phone.imagen" class="q-pa-md"> </q-img>
         </q-card-section>
         <!-- Contenido de la tarjeta -->
         <q-card-section class="card-content">
-          <p class="text-weight-bold">Precio: ${{ phone.precio }}</p>
-          <p class="q-mb-sm">{{ phone.modelo }}</p>
-          <router-link to="/DetallesTelefono">Ver más</router-link>
+          <q-list class="caracteristicas-verticales">
+            <q-list-item>
+              <q-icon name="phone" />
+              <q-label>{{ phone.modelo }}</q-label>
+            </q-list-item>
+            <q-list-item>
+              <q-icon name="tv" />
+              <q-label>{{ phone.Tamaño }} Pulgadas</q-label>
+            </q-list-item>
+            <q-list-item>
+              <q-icon name="server" />
+              <q-label>{{ phone.Almacenamiento }} memoria interna</q-label>
+            </q-list-item>
+            <q-list-item>
+              <q-icon name="memory" />
+              <q-label>{{ phone.ram }} memoria ram</q-label>
+            </q-list-item>
+          </q-list>
+
+          <p class="text-h6 text-weight-bold">${{ phone.precio }}</p>
+          <q-btn
+            color="primary"
+            label="Añadir al carrito"
+            align="center"
+          ></q-btn>
           <!-- Accion de la tarrjeta -->
         </q-card-section>
       </q-card>
     </div>
   </q-page>
+  <q-page-container>
+    <router-view />
+  </q-page-container>
 </template>
 
 <script>
@@ -88,15 +87,13 @@ export default {
     return {
       precio: '',
       hasta: '',
-      dialogOpen: false,
-      selectedPhoneIndex: null,
       phones: telefonos.phones,
     };
   },
   methods: {
-    openDialog(index) {
-      this.selectedPhoneIndex = index;
-      this.dialogOpen = true;
+    VerDetalles(modelo) {
+      // Navegar a la página de detalles con el modelo como parámetro
+      this.$router.push(`/DetallesTelefono/${modelo}`);
     },
   },
 };
