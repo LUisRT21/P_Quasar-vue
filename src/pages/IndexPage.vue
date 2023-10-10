@@ -41,7 +41,7 @@
         <span class="q-focus-helper"></span>
         <!-- Imagen de la tarjeta -->
         <q-card-section>
-          <q-img :src="phone.imagen" class="q-pa-md"> </q-img>
+          <q-img :src="phone.imagen[0]" class="q-pa-md"> </q-img>
         </q-card-section>
         <!-- Contenido de la tarjeta -->
         <q-card-section class="card-content">
@@ -80,9 +80,9 @@ export default {
     };
   },
   methods: {
-    VerDetalles(modelo) {
+    VerDetalles(indice) {
       // Navegar a la página de detalles con el modelo como parámetro
-      this.$router.push(`/DetallesTelefono/${modelo}`);
+      this.$router.push(`/DetallesTelefono/${indice}`);
     },
   },
 };
