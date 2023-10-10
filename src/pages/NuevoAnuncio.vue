@@ -12,7 +12,7 @@
         <q-card class="my-card col-12 col-sm-6 col-md-10 col-lg-5">
           <q-card-section>
             <q-card-section horizontal>
-              <div col text-left text-weight-bold class="text-h6 q-pt-xs">
+              <div col text-left text-weight-bold class="text-h6 q-pt-md">
                 Estado:
               </div>
               <q-card-section>
@@ -146,6 +146,10 @@
             bg-color="white primary"
             prefix="$"
           />
+          <div class="q-pa-md q-gutter-sm">
+            <q-btn color="primary" icon="cancel" label="Cancelar" />
+            <q-btn color="primary" icon="ion-save" label="Guardar" />
+          </div>
         </div>
 
         <q-card class="my-card col-12 col-sm-6 col-md-12 col-lg-6" flex>
