@@ -48,6 +48,7 @@
             dense
             icon="ion-add-circle-outline"
             class="q-mr-sm"
+            @click="AñadirAnuncio()"
           />
           <q-btn flat round dense icon="ion-cart">
             <q-badge color="primary" floating>4</q-badge>
@@ -59,57 +60,59 @@
     <!-- Elementos en la opción para filtrar los telefonos -->
     <q-drawer
       show-if-above
-      v-model="drawer"
+      v-model="leftDrawerOpen"
       side="left"
       bordered
-      class="accent"
+      scrollable
     >
-      <q-scroll-area class="fit">
-        <div class="q-pa-md q-gutter-lg">
-          <q-toggle v-model="value" color="primary" label="Nuevo" />
-        </div>
-        <q-card class="my-card">
-          <q-card-section>
-            <div class="text-h6">Marca</div>
-            <div class="q-pa-lg">
-              <q-option-group
-                v-model="group1"
-                :options="opcionesGrupo1"
-                color="secondary"
-                type="checkbox"
-              ></q-option-group></div
-          ></q-card-section>
-        </q-card>
-        <q-card class="my-card">
-          <q-card-section>
-            <div class="text-h6">Sistema</div>
-            <div class="q-pa-lg">
-              <q-option-group
-                v-model="group2"
-                :options="opcionesGrupo2"
-                color="primary"
-                type="checkbox"
-              ></q-option-group></div
-          ></q-card-section>
-        </q-card>
-        <q-card class="my-card">
-          <q-card-section>
-            <div class="text-h6">Pantalla</div>
-            <div class="q-pa-lg">
-              <q-option-group
-                v-model="group2"
-                :options="opcionesGrupo3"
-                color="secondary"
-                type="checkbox"
-              ></q-option-group></div
-          ></q-card-section>
-        </q-card>
-      </q-scroll-area>
+      <div class="q-pa-md q-gutter-lg">
+        <q-toggle v-model="value" color="primary" label="Nuevo" />
+      </div>
+      <q-card class="my-card">
+        <q-card-section>
+          <div class="text-h6">Marca</div>
+          <div class="q-pa-lg">
+            <q-option-group
+              v-model="group1"
+              :options="opcionesGrupo1"
+              color="secondary"
+              type="checkbox"
+            ></q-option-group></div
+        ></q-card-section>
+      </q-card>
+      <q-card class="my-card">
+        <q-card-section>
+          <div class="text-h6">Sistema</div>
+          <div class="q-pa-lg">
+            <q-option-group
+              v-model="group2"
+              :options="opcionesGrupo2"
+              color="primary"
+              type="checkbox"
+            ></q-option-group></div
+        ></q-card-section>
+      </q-card>
+      <q-card class="my-card">
+        <q-card-section>
+          <div class="text-h6">Pantalla</div>
+          <div class="q-pa-lg">
+            <q-option-group
+              v-model="group2"
+              :options="opcionesGrupo3"
+              color="secondary"
+              type="checkbox"
+            ></q-option-group></div
+        ></q-card-section>
+      </q-card>
     </q-drawer>
 
     <q-page-container>
       <router-view />
     </q-page-container>
+
+    <q-main>
+      <router-view />
+    </q-main>
 
     <q-footer> </q-footer>
   </q-layout>
@@ -120,11 +123,11 @@ import { ref } from 'vue';
 
 export default {
   setup(props) {
-    const drawer = ref(false);
+    const leftDrawerOpen = ref(false);
     const value = ref(false);
 
     const toggleLeftDrawer = () => {
-      drawer.value = !drawer.value;
+      leftDrawerOpen.value = !leftDrawerOpen.value;
     };
 
     const group1 = ref([]); //Grupo 1
@@ -184,7 +187,7 @@ export default {
     ];
 
     return {
-      drawer,
+      leftDrawerOpen,
       value,
       toggleLeftDrawer,
       group1, // Incluye el primer grupo
@@ -194,6 +197,14 @@ export default {
       opcionesGrupo2, // Incluye las opciones del segundo grupo
       opcionesGrupo3, // Incluye las opciones del tercer grupo
     };
+  },
+  methods: {
+    AñadirAnuncio() {
+      this.$router.push({
+        path: 'NuevoAnuncio',
+        component: () => import('pages/NuevoAnuncio.vue'),
+      });
+    },
   },
 };
 </script>
