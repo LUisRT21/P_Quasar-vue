@@ -43,10 +43,35 @@
           <p class="text-h6 text-weight-bold">${{ phone.precio }}</p>
           <q-btn color="primary" label="Comprar" class="justify-center q-ma-xs">
           </q-btn>
-          <q-card class="q-ma-md" style="width: 100%; height: 50px">
+          <q-card class="q-ma-md" style="width: 80%; height: 50px">
             <q-card-section>
               <p>{{ phone.vendedor }},{{ phone.numero }}</p>
-              <p></p>
+            </q-card-section>
+          </q-card>
+          <q-card
+            class="q-ma-md"
+            style="
+              width: 50%;
+              height: 50px;
+              background-color: white;
+              border: 2px solid black;
+            "
+          >
+            <q-card-section>
+              <p>Descripción</p>
+            </q-card-section>
+          </q-card>
+          <q-card
+            class="q-ma-md"
+            style="
+              width: 50%;
+              height: 50px;
+              background-color: white;
+              border: 2px solid black;
+            "
+          >
+            <q-card-section>
+              <p>Ubicación</p>
             </q-card-section>
           </q-card>
         </div>
