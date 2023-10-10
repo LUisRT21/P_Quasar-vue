@@ -9,7 +9,7 @@
     </q-header>
     <q-page-container>
       <div class="q-pa-md row items-start q-gutter-md">
-        <q-card class="my-card">
+        <q-card class="my-card col-12 col-sm-6 col-md-10 col-lg-5">
           <q-card-section>
             <q-card-section horizontal>
               <div col text-left text-weight-bold class="text-h6 q-pt-xs">
@@ -119,7 +119,130 @@
             </q-card-section>
           </q-card-section>
         </q-card>
+
+        <div col text-left text-weight-bold class="text-h6 q-pt-xs">
+          Título breve del anuncio
+          <q-input outlined bg-color="white primary" v-model="titulo" />
+          Vendedor:
+          <q-input outlined bg-color="white primary" v-model="vendedor" />
+          Teléfono:
+          <q-input outlined bg-color="white primary" v-model="telefono" />
+          DESCRIPCIÓN
+          <q-input
+            v-model="textareaModel"
+            filled
+            bg-color="white"
+            type="textarea"
+            color="primary"
+            :shadow-text="textareaShadowText"
+            @keydown="processTextareaFill"
+            @focus="processTextareaFill"
+          />
+          Precio:
+          <q-input
+            v-model="precio"
+            type="number"
+            outlined
+            bg-color="white primary"
+            prefix="$"
+          />
+        </div>
+
+        <q-card class="my-card col-12 col-sm-6 col-md-12 col-lg-6" flex>
+          <q-card-section horizontal>
+            <q-card-section vertical class="q-mt-xl">
+              <q-card-section>
+                <q-btn push round color="primary" icon="add" />
+              </q-card-section>
+              <q-card-section>
+                <q-btn push round color="primary" icon="remove" />
+              </q-card-section>
+            </q-card-section>
+            <q-card-section class="q-col-sm">
+              <div class="q-pa-md">
+                <q-markup-table :separator="separator" flat bordered>
+                  <thead>
+                    <tr>
+                      <q-item>
+                        <q-item-section>
+                          <th class="text-left">N</th>
+                        </q-item-section>
+                        <q-item-section>
+                          <th class="text-right">Tamaño</th>
+                        </q-item-section>
+                        <q-item-section>
+                          <th class="text-right">Tipo</th>
+                        </q-item-section>
+                      </q-item>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <q-item clickable v-ripple>
+                        <q-item-section>
+                          <td class="text-left">1</td>
+                        </q-item-section>
+                        <q-item-section>
+                          <td class="text-right">159</td>
+                        </q-item-section>
+                        <q-item-section>
+                          <td class="text-right">6</td>
+                        </q-item-section>
+                      </q-item>
+                    </tr>
+                    <tr>
+                      <q-item clickable v-ripple>
+                        <q-item-section>
+                          <td class="text-left">2</td>
+                        </q-item-section>
+                        <q-item-section>
+                          <td class="text-right">237</td>
+                        </q-item-section>
+                        <q-item-section>
+                          <td class="text-right">9</td>
+                        </q-item-section>
+                      </q-item>
+                    </tr>
+                    <tr>
+                      <q-item clickable v-ripple>
+                        <q-item-section>
+                          <td class="text-left">3</td>
+                        </q-item-section>
+                        <q-item-section>
+                          <td class="text-right">262</td>
+                        </q-item-section>
+                        <q-item-section>
+                          <td class="text-right">16</td>
+                        </q-item-section>
+                      </q-item>
+                    </tr>
+                    <tr>
+                      <q-item clickable v-ripple>
+                        <q-item-section>
+                          <td class="text-left">4</td>
+                        </q-item-section>
+                        <q-item-section>
+                          <td class="text-right">305</td>
+                        </q-item-section>
+                        <q-item-section>
+                          <td class="text-right">3.7</td>
+                        </q-item-section>
+                      </q-item>
+                    </tr>
+                  </tbody>
+                </q-markup-table>
+              </div>
+            </q-card-section>
+            <q-card-section class="q-col-sm">
+              <div style="width: 300px" class="q-mt-xl">
+                <q-img src="https://cdn.quasar.dev/img/parallax2.jpg" />
+              </div>
+            </q-card-section>
+          </q-card-section>
+        </q-card>
       </div>
+
+      <div class="q-pa-md row items-start q-gutter-md"></div>
     </q-page-container>
   </q-layout>
 </template>
@@ -149,6 +272,42 @@ export default {
     const sistema = ref('');
     const rom = ref('');
     const ram = ref('');
+    const separator = ref('None');
+
+    // Variables para cada campo de entrada
+    const titulo = ref('');
+    const vendedor = ref('');
+    const telefono = ref('');
+    const precio = ref('');
+
+    const textareaFillCancelled = ref(false); // Agregamos textareaFillCancelled como ref
+    const textareaModel = ref(''); // Agregamos textareaModel como ref
+    const textareaShadowText = ref(''); // Agregamos textareaShadowText como ref
+
+    const processTextareaFill = (e) => {
+      if (e === void 0) {
+        return;
+      }
+
+      if (e.keyCode === 27) {
+        if (textareaFillCancelled.value !== true) {
+          textareaFillCancelled.value = true;
+        }
+      } else if (e.keyCode === 9) {
+        if (
+          textareaFillCancelled.value !== true &&
+          textareaShadowText.value.length > 0
+        ) {
+          stopAndPrevent(e);
+          textareaModel.value =
+            (typeof textareaModel.value === 'string'
+              ? textareaModel.value
+              : '') + textareaShadowText.value;
+        }
+      } else if (textareaFillCancelled.value === true) {
+        textareaFillCancelled.value = false;
+      }
+    };
 
     return {
       group,
@@ -160,6 +319,15 @@ export default {
       sistema,
       rom,
       ram,
+      separator,
+      titulo,
+      vendedor,
+      telefono,
+      precio,
+      textareaFillCancelled,
+      textareaModel,
+      textareaShadowText,
+      processTextareaFill, // Agregamos la función al objeto de retorno
     };
   },
 };
