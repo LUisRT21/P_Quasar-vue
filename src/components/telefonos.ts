@@ -162,3 +162,60 @@ export default {
     },
   ],
 };
+
+export function MainLayoutScript() {
+  return {
+    opcionesGrupo1: [
+      {
+        label: 'Samsung',
+        value: 'op1',
+      },
+      {
+        label: 'Huawei',
+        value: 'op2',
+      },
+      {
+        label: 'Nokia',
+        value: 'op3',
+      },
+      {
+        label: 'iPhone',
+        value: 'op4',
+      },
+      {
+        label: 'Xiaomi',
+        value: 'op5',
+      },
+    ],
+
+    opcionesGrupo2: [
+      {
+        label: 'Android',
+        value: 'op6',
+      },
+      {
+        label: 'iOS',
+        value: 'op7',
+      },
+      {
+        label: 'Windows',
+        value: 'op8',
+      },
+    ],
+
+    opcionesGrupo3: [
+      {
+        label: '6.0',
+        value: 'op9',
+      },
+      {
+        label: '5.5',
+        value: 'op10',
+      },
+      {
+        label: '5',
+        value: 'op11',
+      },
+    ],
+  };
+}
