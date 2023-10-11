@@ -48,7 +48,7 @@
       </div>
 
       <div class="q-pa-md row items-start q-gutter-md justify-evenly">
-        <q-card class="my-card col-12 col-sm-6 col-md-10 col-lg-5">
+        <q-card class="my-card col-sm-6 col-md-6 col-lg-6">
           <q-card-section>
             <q-card-section horizontal>
               <div col text-left text-weight-bold class="text-h6 q-pt-md">
@@ -193,7 +193,7 @@
         </div>
 
         <q-card
-          class="my-card col-12 col-md-12 col-lg-6"
+          class="my-card col-12 col-md-8"
           flat
           bordered
           v-if="$q.screen.width >= 768"
@@ -201,7 +201,7 @@
           <q-card-section horizontal>
             <q-card-section>
               <q-card-section
-                class="q-col-xs-12 q-col-sm-6 q-col-md-12 q-col-lg-6 q-mt-xl"
+                class="q-col-sm-10 q-col-md-12 q-col-lg-6 q-mt-xl"
               >
                 <q-card-section>
                   <q-btn
