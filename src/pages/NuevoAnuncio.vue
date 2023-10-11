@@ -8,7 +8,46 @@
       </q-toolbar>
     </q-header>
     <q-page-container>
-      <div class="q-pa-md row items-start q-gutter-md">
+      <div
+        class="col-12 col-sm-6 col-md-12 col-lg-6"
+        v-if="$q.screen.width < 768"
+      >
+        <q-card>
+          <q-card-section>
+            <div class="q-pa-xs q-ma-xs">
+              <q-carousel
+                swipeable
+                animated
+                v-model="slide"
+                thumbnails
+                infinite
+              >
+                <q-carousel-slide
+                  :name="1"
+                  img-src="https://cdn.quasar.dev/img/mountains.jpg"
+                />
+                <q-carousel-slide
+                  :name="2"
+                  img-src="https://cdn.quasar.dev/img/parallax1.jpg"
+                />
+                <q-carousel-slide
+                  :name="3"
+                  img-src="https://cdn.quasar.dev/img/parallax2.jpg"
+                />
+                <q-carousel-slide
+                  :name="4"
+                  img-src="https://cdn.quasar.dev/img/quasar.jpg"
+                />
+              </q-carousel>
+            </div>
+          </q-card-section>
+        </q-card>
+        <div class="q-pa-md">
+          <q-btn color="primary" icon="ion-add-circle" label="Agregar foto" />
+        </div>
+      </div>
+
+      <div class="q-pa-md row items-start q-gutter-md justify-evenly">
         <q-card class="my-card col-12 col-sm-6 col-md-10 col-lg-5">
           <q-card-section>
             <q-card-section horizontal>
@@ -120,7 +159,8 @@
           </q-card-section>
         </q-card>
 
-        <div col text-left text-weight-bold class="text-h6 q-pt-xs">
+        <!-- Puedes hacer esta sección una función y después solo la invoco?-->
+        <div col text-left text-weight-bold class="entradas text-h6">
           Título breve del anuncio
           <q-input outlined bg-color="white primary" v-model="titulo" />
           Vendedor:
@@ -152,19 +192,45 @@
           </div>
         </div>
 
-        <q-card class="my-card col-12 col-sm-6 col-md-12 col-lg-6" flex>
+        <q-card
+          class="my-card col-12 col-md-12 col-lg-6"
+          flat
+          bordered
+          v-if="$q.screen.width >= 768"
+        >
           <q-card-section horizontal>
-            <q-card-section vertical class="q-mt-xl">
-              <q-card-section>
-                <q-btn push round color="primary" icon="add" />
-              </q-card-section>
-              <q-card-section>
-                <q-btn push round color="primary" icon="remove" />
+            <q-card-section>
+              <q-card-section
+                class="q-col-xs-12 q-col-sm-6 q-col-md-12 q-col-lg-6 q-mt-xl"
+              >
+                <q-card-section>
+                  <q-btn
+                    push
+                    round
+                    color="primary"
+                    icon="add"
+                    class="col-xs-2 col-sm-2 col-md-1 col-lg-1"
+                  />
+                </q-card-section>
+                <q-card-section>
+                  <q-btn
+                    push
+                    round
+                    color="primary"
+                    icon="remove"
+                    class="col-xs-2 col-sm-2 col-md-1 col-lg-1"
+                  />
+                </q-card-section>
               </q-card-section>
             </q-card-section>
-            <q-card-section class="q-col-sm">
+            <q-card-section>
               <div class="q-pa-md">
-                <q-markup-table :separator="separator" flat bordered>
+                <q-markup-table
+                  :separator="separator"
+                  flat
+                  bordered
+                  class="q-col-md-4 q-col-lg-6"
+                >
                   <thead>
                     <tr>
                       <q-item>
@@ -237,16 +303,12 @@
                 </q-markup-table>
               </div>
             </q-card-section>
-            <q-card-section class="q-col-sm">
-              <div style="width: 300px" class="q-mt-xl">
-                <q-img src="https://cdn.quasar.dev/img/parallax2.jpg" />
-              </div>
-            </q-card-section>
+            <div class="col-5 q-my-lg q-mr-md q-mt-xl">
+              <q-img src="https://cdn.quasar.dev/img/parallax2.jpg" />
+            </div>
           </q-card-section>
         </q-card>
       </div>
-
-      <div class="q-pa-md row items-start q-gutter-md"></div>
     </q-page-container>
   </q-layout>
 </template>
@@ -257,6 +319,7 @@ import { MainLayoutScript } from 'src/components/telefonos';
 
 export default {
   setup() {
+    const slide = ref(1);
     const group = ref();
     const options = [
       {
@@ -284,9 +347,9 @@ export default {
     const telefono = ref('');
     const precio = ref('');
 
-    const textareaFillCancelled = ref(false); // Agregamos textareaFillCancelled como ref
-    const textareaModel = ref(''); // Agregamos textareaModel como ref
-    const textareaShadowText = ref(''); // Agregamos textareaShadowText como ref
+    const textareaFillCancelled = ref(false);
+    const textareaModel = ref('');
+    const textareaShadowText = ref('');
 
     const processTextareaFill = (e) => {
       if (e === void 0) {
@@ -314,6 +377,7 @@ export default {
     };
 
     return {
+      slide,
       group,
       options,
       opcionesGrupo1,
@@ -331,7 +395,7 @@ export default {
       textareaFillCancelled,
       textareaModel,
       textareaShadowText,
-      processTextareaFill, // Agregamos la función al objeto de retorno
+      processTextareaFill,
     };
   },
 };
