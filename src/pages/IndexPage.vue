@@ -50,16 +50,6 @@
           </q-card-section>
         </q-card-section>
       </q-card>
-      <div class="q-pa-md q-gutter-sm">
-        <q-btn
-          v-if="$q.screen.width < 930"
-          square
-          color="primary"
-          icon="filter_alt"
-          @click="abrirDrawer"
-          v-model="leftDrawerOpen"
-        />
-      </div>
     </div>
 
     <div class="q-pa-md row items-start q-gutter-md justify-center">

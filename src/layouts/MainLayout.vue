@@ -14,6 +14,17 @@
             @click="toggleLeftDrawer"
             v-if="$q.screen.width >= 930"
           />
+
+          <div class="q-pa-md q-gutter-sm">
+            <q-btn
+              v-if="$q.screen.width < 930"
+              square
+              color="primary"
+              icon="filter_alt"
+              @click="toggleLeftDrawer"
+              v-model="leftDrawerOpen"
+            />
+          </div>
           <q-toolbar-title v-if="$q.screen.width >= 790"
             >Tienda CellPhone</q-toolbar-title
           >
@@ -40,11 +51,8 @@
           </q-input>
         </q-toolbar>
 
-        <q-toolbar
-          class="col-4 bg-secondary text-accent"
-          v-if="$q.screen.width >= 790"
-        >
-          <div class="q-pa-md q-gutter-sm">
+        <q-toolbar class="col-4">
+          <div class="q-pa-md q-gutter-sm" v-if="$q.screen.width >= 790">
             <q-btn color="primary" @click="handleButtonClick">
               <span v-if="$q.screen.width >= 1070">Inicio</span>
               <q-icon v-else name="home" />
@@ -62,15 +70,23 @@
             icon="ion-add-circle-outline"
             class="q-mr-sm"
             @click="AñadirAnuncio()"
+            v-if="$q.screen.width >= 790"
           />
-          <q-btn flat round dense icon="ion-cart">
+          <q-btn flat round dense icon="ion-cart" v-if="$q.screen.width >= 790">
             <q-badge color="primary" floating>4</q-badge>
           </q-btn>
+          <q-btn
+            v-if="$q.screen.width < 930"
+            square
+            color="primary"
+            icon="ion-md-menu"
+            @click="toggleRightDrawer"
+            v-model="rightDrawerOpen"
+          />
         </q-toolbar>
       </q-toolbar>
     </q-header>
 
-    <!-- Elementos en la opción para filtrar los telefonos -->
     <q-drawer
       show-if-above
       v-model="leftDrawerOpen"
@@ -119,6 +135,35 @@
       </q-card>
     </q-drawer>
 
+    <!-- Elementos en la opción para filtrar los telefonos -->
+    <q-drawer
+      show-if-above
+      v-model="rightDrawerOpen"
+      side="right"
+      bordered
+      scrollable
+      v-if="$q.screen.width < 930"
+    >
+      <q-list dense bordered padding class="rounded-borders">
+        <q-item clickable v-ripple>
+          <q-item-section> Inicio </q-item-section>
+        </q-item>
+
+        <q-item clickable v-ripple>
+          <q-item-section @click="AñadirAnuncio()">
+            Nuevo Anuncio
+          </q-item-section>
+        </q-item>
+
+        <q-item clickable v-ripple>
+          <q-item-section> Carrito </q-item-section>
+        </q-item>
+        <q-item clickable v-ripple>
+          <q-item-section> Estadísticas </q-item-section>
+        </q-item>
+      </q-list>
+    </q-drawer>
+
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -139,21 +184,28 @@ export default {
   setup(props) {
     const leftDrawerOpen = ref(false);
     const value = ref(false);
+    const rightDrawerOpen = ref(false);
 
     const toggleLeftDrawer = () => {
       leftDrawerOpen.value = !leftDrawerOpen.value;
     };
 
-    const group1 = ref([]); //Grupo 1
+    const toggleRightDrawer = () => {
+      rightDrawerOpen.value = !rightDrawerOpen.value;
+    };
+
+    const group1 = ref([]); // Grupo 1
     const group2 = ref([]); // Grupo 2
-    const grupo3 = ref([]); //Grupo 3
+    const grupo3 = ref([]); // Grupo 3
     const { opcionesGrupo1, opcionesGrupo2, opcionesGrupo3 } =
       MainLayoutScript();
 
     return {
       leftDrawerOpen,
+      rightDrawerOpen,
       value,
       toggleLeftDrawer,
+      toggleRightDrawer,
       group1, // Incluye el primer grupo
       group2, // Incluye el segundo grupo
       grupo3, // Incluye el tercer grupo
