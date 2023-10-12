@@ -150,6 +150,7 @@
             color="primary"
             label="Inicio"
             class="q-btn-floating q-btn-round"
+            @click="Inicio()"
           >
           </q-btn>
           <q-btn
@@ -168,6 +169,14 @@
 import telefonos from 'src/components/telefonos.ts';
 import { ref } from 'vue';
 export default {
+  methods: {
+    Inicio() {
+      this.$router.push({
+        path: '/',
+        component: () => import('pages/IndexPage.vue'),
+      });
+    },
+  },
   setup() {
     return {
       slide: ref(1),

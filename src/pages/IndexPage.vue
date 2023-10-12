@@ -54,7 +54,7 @@
 
     <div class="q-pa-md row items-start q-gutter-md justify-center">
       <q-card
-        v-for="(phone, index) in phones"
+        v-for="(phone, index) in phonesPaginados"
         :key="index"
         v-ripple
         class="q-card q-mb-xs col-12 col-sm-6 col-md-3 col-lg-2 my-box cursor-pointer q-hoverable"
@@ -63,7 +63,12 @@
         <span class="q-focus-helper"></span>
         <!-- Imagen de la tarjeta -->
         <q-card-section>
-          <q-img :src="phone.imagen[0]" class="q-pa-md"> </q-img>
+          <q-img
+            :src="phone.imagen[0]"
+            class="q-pa-md"
+            style="height: 200px; padding: 10px; overflow: hidden"
+          >
+          </q-img>
         </q-card-section>
         <!-- Contenido de la tarjeta -->
         <q-card-section class="card-content">
@@ -85,6 +90,13 @@
         </q-card-section>
       </q-card>
     </div>
+    <q-pagination
+      v-model="PaginaActual"
+      :min="1"
+      :max="totalPaginas"
+      @input="cambiarPagina"
+      class="paginado"
+    />
   </q-page>
   <q-page-container>
     <router-view />
@@ -92,20 +104,37 @@
 </template>
 
 <script>
+import { ref, computed } from 'vue';
 import telefonos from 'src/components/telefonos.ts';
-import { ref } from 'vue';
 
 export default {
   methods: {
     VerDetalles(indice) {
-      // Navegar a la página de detalles con el modelo como parámetro
-      this.$router.push(`/DetallesTelefono/${indice}`);
+      const adjustedIndex = (this.PaginaActual - 1) * 6 + indice;
+
+      this.$router.push(`/DetallesTelefono/${adjustedIndex}`);
+    },
+    cambiarPagina(pagina) {
+      console.log('Página actual:', pagina);
+      this.PaginaActual = pagina;
     },
   },
   setup() {
     const single = ref(null);
     const multiple = ref(null);
     const options = ['Precio', 'Fecha'];
+    const itemsPorPagina = 6; // Cambia esto al número deseado de elementos por página
+    const PaginaActual = ref(1);
+
+    const totalPaginas = computed(() => {
+      return Math.ceil(telefonos.phones.length / itemsPorPagina);
+    });
+
+    const phonesPaginados = computed(() => {
+      const startIndex = (PaginaActual.value - 1) * itemsPorPagina;
+      const endIndex = startIndex + itemsPorPagina;
+      return telefonos.phones.slice(startIndex, endIndex);
+    });
 
     return {
       single,
@@ -114,7 +143,21 @@ export default {
       precio: '',
       hasta: '',
       phones: telefonos.phones,
+      PaginaActual,
+      totalPaginas,
+      phonesPaginados,
     };
   },
 };
 </script>
+<style>
+.paginado {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  background-color: #ffbdff;
+  border-radius: 10%;
+}
+</style>
