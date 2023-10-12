@@ -15,6 +15,10 @@ export default {
       ram: 6,
       vendedor: 'Juan Perez',
       numero: '7374-2312',
+      titulo: 'iPhone 14 Pro Max solo tigo',
+      estado: 'Nuevo',
+      descripcion:
+        'Telefono en muy buenas condiciones, tiene dos cámaras, la caja esta abierta, pero con muy poco uso, practicamente nuevo, la compañia con la que estaba es Tigo, asi que el chip debe ser tigo, viene con su caja original y con todos sus accesorios. Puedo mandar más fotos si desea por whatsapp',
     },
     {
       modelo: 'Samsung Galaxy S23 Ultra',
@@ -31,13 +35,17 @@ export default {
       ram: 8,
       vendedor: 'Juan Perez',
       numero: '7374-2312',
+      titulo: 'Samsung Galaxy S23 Ultra buen telefono',
+      estado: 'Nuevo',
+      descripcion:
+        'Telefono en muy buenas condiciones, tiene dos cámaras, la caja esta abierta, pero con muy poco uso, practicamente nuevo, la compañia con la que estaba es Tigo, asi que el chip debe ser tigo, viene con su caja original y con todos sus accesorios. Puedo mandar más fotos si desea por whatsapp',
     },
     {
       modelo: 'Google Pixel 7 Pro',
       imagen: [
         'https://cdn.quasar.dev/img/parallax2.jpg',
         'https://cdn.quasar.dev/img/mountains.jpg',
-        'https://cdn.quasar.dev/img/parallax1.jpg',
+        'https/https://cdn.quasar.dev/img/parallax1.jpg',
         'https://cdn.quasar.dev/img/quasar.jpg',
       ],
       precio: 899,
@@ -47,6 +55,10 @@ export default {
       ram: 12,
       vendedor: 'Juan Perez',
       numero: '7374-2312',
+      titulo: 'Google Pixel 7 Pro en caja',
+      estado: 'Nuevo',
+      descripcion:
+        'Telefono en muy buenas condiciones, tiene dos cámaras, la caja esta abierta, pero con muy poco uso, practicamente nuevo, la compañia con la que estaba es Tigo, asi que el chip debe ser tigo, viene con su caja original y con todos sus accesorios. Puedo mandar más fotos si desea por whatsapp',
     },
     {
       modelo: 'OnePlus 9T',
@@ -63,6 +75,10 @@ export default {
       ram: 8,
       vendedor: 'Juan Perez',
       numero: '7374-2312',
+      titulo: 'OnePlus 9T',
+      estado: 'Nuevo 10 de 10',
+      descripcion:
+        'Telefono en muy buenas condiciones, tiene dos cámaras, la caja esta abierta, pero con muy poco uso, practicamente nuevo, la compañia con la que estaba es Tigo, asi que el chip debe ser tigo, viene con su caja original y con todos sus accesorios. Puedo mandar más fotos si desea por whatsapp',
     },
     {
       modelo: 'Xiaomi Mi 12',
@@ -79,6 +95,10 @@ export default {
       ram: 10,
       vendedor: 'Juan Perez',
       numero: '7374-2312',
+      titulo: 'Xiaomi Mi 12 calidad precio',
+      estado: 'Nuevo',
+      descripcion:
+        'Telefono en muy buenas condiciones, tiene dos cámaras, la caja esta abierta, pero con muy poco uso, practicamente nuevo, la compañia con la que estaba es Tigo, asi que el chip debe ser tigo, viene con su caja original y con todos sus accesorios. Puedo mandar más fotos si desea por whatsapp',
     },
     {
       modelo: 'Sony Xperia 5 III',
@@ -95,6 +115,10 @@ export default {
       ram: 8,
       vendedor: 'Juan Perez',
       numero: '7374-2312',
+      titulo: 'Sony Xperia 5 III estilo juvenil',
+      estado: 'Nuevo',
+      descripcion:
+        'Telefono en muy buenas condiciones, tiene dos cámaras, la caja esta abierta, pero con muy poco uso, practicamente nuevo, la compañia con la que estaba es Tigo, asi que el chip debe ser tigo, viene con su caja original y con todos sus accesorios. Puedo mandar más fotos si desea por whatsapp',
     },
     {
       modelo: 'LG G9 ThinQ',
@@ -111,6 +135,10 @@ export default {
       ram: 6,
       vendedor: 'Juan Perez',
       numero: '7374-2312',
+      titulo: 'LG G9 ThinQ exlente pantalla',
+      estado: 'Nuevo',
+      descripcion:
+        'Telefono en muy buenas condiciones, tiene dos cámaras, la caja esta abierta, pero con muy poco uso, practicamente nuevo, la compañia con la que estaba es Tigo, asi que el chip debe ser tigo, viene con su caja original y con todos sus accesorios. Puedo mandar más fotos si desea por whatsapp',
     },
     {
       modelo: 'Huawei P50 Pro',
@@ -127,6 +155,10 @@ export default {
       ram: 8,
       vendedor: 'Juan Perez',
       numero: '7374-2312',
+      titulo: 'Huawei P50 Pro binchipil',
+      estado: 'Nuevo',
+      descripcion:
+        'Telefono en muy buenas condiciones, tiene dos cámaras, la caja esta abierta, pero con muy poco uso, practicamente nuevo, la compañia con la que estaba es Tigo, asi que el chip debe ser tigo, viene con su caja original y con todos sus accesorios. Puedo mandar más fotos si desea por whatsapp',
     },
     {
       modelo: 'Motorola Moto G7',
@@ -143,6 +175,10 @@ export default {
       ram: 4,
       vendedor: 'Juan Perez',
       numero: '7374-2312',
+      titulo: 'Motorola Moto G7 es un telefono',
+      estado: 'Nuevo',
+      descripcion:
+        'Telefono en muy buenas condiciones, tiene dos cámaras, la caja esta abierta, pero con muy poco uso, practicamente nuevo, la compañia con la que estaba es Tigo, asi que el chip debe ser tigo, viene con su caja original y con todos sus accesorios. Puedo mandar más fotos si desea por whatsapp',
     },
     {
       modelo: 'Nokia 9 PureView',
@@ -159,6 +195,9 @@ export default {
       ram: 6,
       vendedor: 'Juan Perez',
       numero: '7374-2312',
+      titulo: 'Nokia 9 PureView tambien es un telefono',
+      estado: 'Nuevo',
+      descripcion: 'que si es un telefono ',
     },
   ],
 };

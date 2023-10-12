@@ -1,86 +1,169 @@
 <template>
   <q-page>
-    <div class="q-pa-md row items-start q-gutter-md">
-      <q-card class="q-card col-12 col-sm-6 col-md-5 col-lg-3">
-        <q-card-section>
-          <q-carousel
-            swipeable
-            animated
-            v-model="slide"
-            v-model:fullscreen="fullscreen"
-            thumbnails
-            infinite
-          >
-            <q-carousel-slide :name="1" :img-src="phone.imagen[0]" />
-            <q-carousel-slide :name="2" :img-src="phone.imagen[1]" />
-            <q-carousel-slide :name="3" :img-src="phone.imagen[2]" />
-            <q-carousel-slide :name="4" :img-src="phone.imagen[3]" />
-          </q-carousel>
-        </q-card-section>
-      </q-card>
+    <div class="gt-sm">
       <div class="row">
-        <div class="col-12">
-          <q-list class="col-12">
-            <q-list-item>
-              <q-icon name="phone" />
-              <q-label>{{ phone.modelo }},</q-label>
-            </q-list-item>
-            <q-list-item>
-              <q-icon name="tv" />
-              <q-label>{{ phone.Tamaño }} Pulgadas,</q-label>
-            </q-list-item>
-            <q-list-item>
-              <q-icon name="server" />
-              <q-label>{{ phone.Almacenamiento }} memoria interna,</q-label>
-            </q-list-item>
-            <q-list-item>
-              <q-icon name="memory" />
-              <q-label>{{ phone.ram }} memoria ram,</q-label>
-            </q-list-item>
-          </q-list>
+        <div class="col">
+          <q-card>
+            <q-card-section>
+              <q-carousel
+                swipeable
+                animated
+                v-model="slide"
+                v-model:fullscreen="fullscreen"
+                thumbnails
+                infinite
+              >
+                <q-carousel-slide :name="1" :img-src="phone.imagen[0]" />
+                <q-carousel-slide :name="2" :img-src="phone.imagen[1]" />
+                <q-carousel-slide :name="3" :img-src="phone.imagen[2]" />
+                <q-carousel-slide :name="4" :img-src="phone.imagen[3]" />
+              </q-carousel>
+            </q-card-section>
+          </q-card>
         </div>
-        <div class="col-12">
-          <p class="text-h6 text-weight-bold">${{ phone.precio }}</p>
-          <q-btn color="primary" label="Comprar" class="justify-center q-ma-xs">
+        <div class="col">
+          <div class="row q-ma-lg">
+            <h4>{{ phone.titulo }}, estado {{ phone.estado }}</h4>
+            <div class="row q-mx-lg"></div>
+            <spam class="text-h6 text-center">${{ phone.precio }}</spam>
+          </div>
+          <div class="row">
+            <div class="col-5 q-ma-lg">
+              <q-btn-toggle
+                spread
+                color="primary"
+                :options="[{ label: 'comprar', value: 'comprar' }]"
+              />
+              <div class="row q-ma-lg">
+                <div class="col">
+                  <div class="row">
+                    <div>
+                      <spam>vendedor:{{ phone.vendedor }}</spam>
+                    </div>
+                    <div>
+                      <spam>telefono:{{ phone.numero }}</spam>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row q-mb-lg flex-center">
+        <div class="col-8">
+          <h4 class="text-center">DESCRIPCION</h4>
+          <div class="row">
+            <div class="col">
+              <fieldset style="flex: 1">
+                <p>
+                  Modelo: {{ phone.modelo }}
+                  <br />
+                  Precio: {{ phone.precio }}
+                  <br />
+                  Sistema operativo: {{ phone.os }}
+                  <br />
+                  Tamaño de pantalla: {{ phone.Tamaño }} pulgadas
+                  <br />
+                  Almacenamiento: {{ phone.Almacenamiento }} GB
+                  <br />
+                  RAM: {{ phone.ram }} GB
+                </p>
+              </fieldset>
+            </div>
+            <div class="col">
+              <fieldset style="flex: 1">
+                <p>{{ phone.descripcion }}</p>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lt-md">
+      <div class="q-pa-md row items-start">
+        <q-card class="q-card col-12 col-sm-6 col-md-6">
+          <q-card-section>
+            <q-carousel
+              swipeable
+              animated
+              v-model="slide"
+              v-model:fullscreen="fullscreen"
+              thumbnails
+              infinite
+            >
+              <q-carousel-slide :name="1" :img-src="phone.imagen[0]" />
+              <q-carousel-slide :name="2" :img-src="phone.imagen[1]" />
+              <q-carousel-slide :name="3" :img-src="phone.imagen[2]" />
+              <q-carousel-slide :name="4" :img-src="phone.imagen[3]" />
+            </q-carousel>
+          </q-card-section>
+        </q-card>
+
+        <div>
+          <p class="text-h6 text-weight-bold">
+            {{ phone.titulo }}, estado {{ phone.estado }}
+          </p>
+          <p class="text-h6 text-weight-bold text-center">
+            ${{ phone.precio }}
+          </p>
+          <div class="row">
+            <spam class="text-h6">Vendedor: {{ phone.vendedor }}</spam>
+          </div>
+          <div class="row">
+            <spam class="text-h6">Telefono: {{ phone.numero }}</spam>
+          </div>
+        </div>
+        <div style="flex: 1">
+          <fieldset>
+            <p>
+              Modelo: {{ phone.modelo }}
+              <br />
+              Precio: {{ phone.precio }}
+              <br />
+              Sistema operativo: {{ phone.os }}
+              <br />
+              Tamaño de pantalla: {{ phone.Tamaño }} pulgadas
+              <br />
+              Almacenamiento: {{ phone.Almacenamiento }} GB
+              <br />
+              RAM: {{ phone.ram }} GB
+            </p>
+          </fieldset>
+
+          <fieldset>
+            <p>
+              {{ phone.descripcion }}
+            </p>
+          </fieldset>
+        </div>
+        <div
+          class="fixed"
+          style="
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+          "
+        >
+          <q-btn
+            color="primary"
+            label="Inicio"
+            class="q-btn-floating q-btn-round"
+          >
           </q-btn>
-          <q-card class="q-ma-md" style="width: 80%; height: 50px">
-            <q-card-section>
-              <p>{{ phone.vendedor }},{{ phone.numero }}</p>
-            </q-card-section>
-          </q-card>
-          <q-card
-            class="q-ma-md"
-            style="
-              width: 50%;
-              height: 50px;
-              background-color: white;
-              border: 2px solid black;
-            "
+          <q-btn
+            color="primary"
+            label="Comprar"
+            class="q-btn-floating q-btn-round"
           >
-            <q-card-section>
-              <p>Descripción</p>
-            </q-card-section>
-          </q-card>
-          <q-card
-            class="q-ma-md"
-            style="
-              width: 50%;
-              height: 50px;
-              background-color: white;
-              border: 2px solid black;
-            "
-          >
-            <q-card-section>
-              <p>Ubicación</p>
-            </q-card-section>
-          </q-card>
+          </q-btn>
         </div>
       </div>
     </div>
   </q-page>
   <router-view />
 </template>
-
 <script>
 import telefonos from 'src/components/telefonos.ts';
 import { ref } from 'vue';
@@ -92,25 +175,22 @@ export default {
   },
   data() {
     return {
-      phone: null, // Agregar el objeto phone
+      phone: null,
     };
   },
   created() {
-    // Obtener el índice del teléfono de la URL
     const phoneIndex = parseInt(this.$route.params.telefono);
 
-    // Verificar si el índice es válido
     if (
       !isNaN(phoneIndex) &&
       phoneIndex >= 0 &&
       phoneIndex < telefonos.phones.length
     ) {
-      // Buscar el teléfono correspondiente en el arreglo phones
       this.phone = telefonos.phones[phoneIndex];
     } else {
-      // Manejar el caso en el que el índice no sea válido
       console.error(`Índice de teléfono inválido: ${phoneIndex}`);
     }
   },
 };
 </script>
+<style></style>
