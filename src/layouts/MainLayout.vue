@@ -12,8 +12,11 @@
             round
             icon="ion-md-menu"
             @click="toggleLeftDrawer"
+            v-if="$q.screen.width >= 930"
           />
-          <q-toolbar-title>Tienda CellPhone</q-toolbar-title>
+          <q-toolbar-title v-if="$q.screen.width >= 790"
+            >Tienda CellPhone</q-toolbar-title
+          >
           <q-space />
           <q-input
             dark
@@ -23,6 +26,7 @@
             v-model="text"
             input-class="text-left"
             class="q-ml-md"
+            style="width: 50%"
           >
             <template v-slot:prepend>
               <q-icon v-if="text === ''" name="search" />
@@ -36,10 +40,19 @@
           </q-input>
         </q-toolbar>
 
-        <q-toolbar class="col-4 bg-secondary text-accent">
+        <q-toolbar
+          class="col-4 bg-secondary text-accent"
+          v-if="$q.screen.width >= 790"
+        >
           <div class="q-pa-md q-gutter-sm">
-            <q-btn color="primary" label="Inicio" />
-            <q-btn color="primary" label="Estadísticas" />
+            <q-btn color="primary" @click="handleButtonClick">
+              <span v-if="$q.screen.width >= 1070">Inicio</span>
+              <q-icon v-else name="home" />
+            </q-btn>
+            <q-btn color="primary" @click="handleButtonClick">
+              <span v-if="$q.screen.width >= 1070">Estadísticas</span>
+              <q-icon v-else name="insert_chart_outlined" />
+            </q-btn>
           </div>
           <q-space />
           <q-btn

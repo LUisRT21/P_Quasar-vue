@@ -1,6 +1,6 @@
 <template>
   <q-page class="row items-center justify-evenly accent">
-    <q-card class="q-card q-mb-md q-hoverable">
+    <q-card class="q-card q-mb-md q-hoverable" v-if="$q.screen.width >= 930">
       <q-card-section>
         <q-card-section>
           <q-form>
@@ -30,6 +30,38 @@
         </q-card-section>
       </q-card-section>
     </q-card>
+
+    <div class="q-pa-md row items-start q-gutter-md justify-center">
+      <q-card class="q-card q-mb-md q-hoverable" v-if="$q.screen.width < 930">
+        <q-card-section horizontal>
+          <q-card-section>
+            <div col text-left text-weight-bold class="text-subtitle-1 q-pt-lg">
+              Ordenar por:
+            </div>
+          </q-card-section>
+          <q-card-section>
+            <q-select
+              filled
+              v-model="multiple"
+              multiple
+              :options="options"
+              style="width: 100%"
+            />
+          </q-card-section>
+        </q-card-section>
+      </q-card>
+      <div class="q-pa-md q-gutter-sm">
+        <q-btn
+          v-if="$q.screen.width < 930"
+          square
+          color="primary"
+          icon="filter_alt"
+          @click="abrirDrawer"
+          v-model="leftDrawerOpen"
+        />
+      </div>
+    </div>
+
     <div class="q-pa-md row items-start q-gutter-md justify-center">
       <q-card
         v-for="(phone, index) in phones"
@@ -71,19 +103,28 @@
 
 <script>
 import telefonos from 'src/components/telefonos.ts';
+import { ref } from 'vue';
+
 export default {
-  data() {
-    return {
-      precio: '',
-      hasta: '',
-      phones: telefonos.phones,
-    };
-  },
   methods: {
     VerDetalles(indice) {
       // Navegar a la página de detalles con el modelo como parámetro
       this.$router.push(`/DetallesTelefono/${indice}`);
     },
+  },
+  setup() {
+    const single = ref(null);
+    const multiple = ref(null);
+    const options = ['Precio', 'Fecha'];
+
+    return {
+      single,
+      multiple,
+      options,
+      precio: '',
+      hasta: '',
+      phones: telefonos.phones,
+    };
   },
 };
 </script>
