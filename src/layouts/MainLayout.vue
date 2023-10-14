@@ -146,9 +146,6 @@
     <q-drawer v-model="rightDrawerOpen" side="right" bordered>
       <q-list dense padding class="rounded-borders">
         <q-item clickable v-ripple>
-          <q-item-section style="font-size: 20px"> Inicio </q-item-section>
-        </q-item>
-        <q-item clickable v-ripple>
           <q-item-section style="font-size: 20px" @click="AñadirAnuncio()">
             Nuevo Anuncio
           </q-item-section>
