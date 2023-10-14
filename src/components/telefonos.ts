@@ -1,12 +1,12 @@
 export default {
   phones: [
     {
-      modelo: 'iPhone_14_Pro_Max',
+      modelo: 'iPhone 14 Pro Max',
       imagen: [
-        'src/assets/imagenes-telefonos/iphone_14_pro_max_01.jpg',
-        'src/assets/imagenes-telefonos/iphone_14_pro_max_02.jpg',
-        'src/assets/imagenes-telefonos/iphone_14_pro_max_03.jpg',
-        'src/assets/imagenes-telefonos/iphone_14_pro_max_04.jpg',
+        'https://cdn.quasar.dev/img/parallax2.jpg',
+        'https://cdn.quasar.dev/img/mountains.jpg',
+        'https://cdn.quasar.dev/img/parallax1.jpg',
+        'https://cdn.quasar.dev/img/quasar.jpg',
       ],
       precio: 1299,
       os: 'iOS 16',
