@@ -115,7 +115,7 @@
                 <q-select
                   v-model="sistema"
                   standout="bg-primary text-white"
-                  :options="opcionesGrupo1"
+                  :options="opcionesGrupo2"
                   class="q-pl-xs"
                 />
               </q-card-section>
@@ -148,7 +148,7 @@
               </div>
               <q-card-section>
                 <q-input
-                  v-model="aom"
+                  v-model="ram"
                   type="number"
                   standout="bg-primary text-white"
                   class="q-pl-xl"
@@ -188,7 +188,12 @@
           />
           <div class="q-pa-md q-gutter-sm">
             <q-btn color="primary" icon="cancel" label="Cancelar" />
-            <q-btn color="primary" icon="ion-save" label="Guardar" />
+            <q-btn
+              @click="agregarAnuncio"
+              color="primary"
+              icon="ion-save"
+              label="Guardar"
+            />
           </div>
         </div>
 
@@ -316,27 +321,29 @@
 <script>
 import { ref } from 'vue';
 import { MainLayoutScript } from 'src/components/telefonos';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from 'boot/firebase';
 
 export default {
   setup() {
     const slide = ref(1);
     const group = ref();
+    const sistema = ref();
     const options = [
       {
         label: 'Nuevo',
-        value: 'op1',
+        value: 'Nuevo',
       },
       {
         label: 'Usado',
-        value: 'op2',
+        value: 'Usado',
       },
     ];
 
-    const { opcionesGrupo1 } = MainLayoutScript();
+    const { opcionesGrupo2 } = MainLayoutScript();
     const marca = ref('');
     const modelo = ref('');
     const pantalla = ref('');
-    const sistema = ref('');
     const rom = ref('');
     const ram = ref('');
     const separator = ref('None');
@@ -350,6 +357,8 @@ export default {
     const textareaFillCancelled = ref(false);
     const textareaModel = ref('');
     const textareaShadowText = ref('');
+
+    //const selectedSistema = ref(opcionesGrupo2[0].value);
 
     const processTextareaFill = (e) => {
       if (e === void 0) {
@@ -376,15 +385,51 @@ export default {
       }
     };
 
+    const agregarAnuncio = async () => {
+      try {
+        const docRef = await addDoc(collection(db, 'anuncios'), {
+          titulo: titulo.value, // Usa el valor de titulo
+          vendedor: vendedor.value, // Usa el valor de vendedor
+          numero: telefono.value, // Usa el valor de telefono
+          precio: precio.value, // Usa el valor de precio
+          descripcion: textareaModel.value,
+          Almacenamiento: rom.value,
+          Tamaño: pantalla.value,
+          os: sistema.value.value,
+          ram: ram.value,
+          modelo: modelo.value,
+          marca: marca.value,
+          estado: group.value,
+        });
+
+        //Aquí limpio todas las entradas
+        (titulo.value = ''), // Usa el valor de titulo
+          (vendedor.value = ''), // Usa el valor de vendedor
+          (telefono.value = ''), // Usa el valor de telefono
+          (precio.value = ''), // Usa el valor de precio
+          (textareaModel.value = ''),
+          (rom.value = ''),
+          (pantalla.value = ''),
+          (ram.value = ''),
+          (modelo.value = ''),
+          (marca.value = ''),
+          (sistema.value = null),
+          (group.value = null),
+          console.log('Document written with ID: ', docRef.id);
+      } catch (e) {
+        console.error('Error adding document: ', e);
+      }
+    };
+
     return {
       slide,
       group,
       options,
-      opcionesGrupo1,
+      sistema,
+      opcionesGrupo2,
       marca,
       modelo,
       pantalla,
-      sistema,
       rom,
       ram,
       separator,
@@ -396,6 +441,7 @@ export default {
       textareaModel,
       textareaShadowText,
       processTextareaFill,
+      agregarAnuncio,
     };
   },
 };

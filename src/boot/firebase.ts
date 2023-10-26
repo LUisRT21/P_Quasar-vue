@@ -1,7 +1,6 @@
 import { boot } from 'quasar/wrappers';
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import { VueFire } from 'vuefire';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBjbwxdoHDlHUmdDE-XlSi6fhiXaen29n4',

@@ -230,15 +230,15 @@ export function MainLayoutScript() {
     opcionesGrupo2: [
       {
         label: 'Android',
-        value: 'op6',
+        value: 'Android',
       },
       {
         label: 'iOS',
-        value: 'op7',
+        value: 'iOS',
       },
       {
         label: 'Windows',
-        value: 'op8',
+        value: 'Windows',
       },
     ],
 
