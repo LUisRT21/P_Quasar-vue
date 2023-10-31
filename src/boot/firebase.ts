@@ -1,6 +1,7 @@
 import { boot } from 'quasar/wrappers';
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBjbwxdoHDlHUmdDE-XlSi6fhiXaen29n4',
@@ -14,8 +15,10 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const storage = getStorage(app);
 
 export default boot(({ app }) => {
   app.provide('firebase', app);
 });
 export { db };
+export { storage };
