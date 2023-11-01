@@ -13,10 +13,22 @@
                 thumbnails
                 infinite
               >
-                <q-carousel-slide :name="1" :img-src="phone.imagen[0]" />
-                <q-carousel-slide :name="2" :img-src="phone.imagen[1]" />
-                <q-carousel-slide :name="3" :img-src="phone.imagen[2]" />
-                <q-carousel-slide :name="4" :img-src="phone.imagen[3]" />
+                <q-carousel-slide
+                  :name="1"
+                  img-src="https://cdn.quasar.dev/img/mountains.jpg"
+                />
+                <q-carousel-slide
+                  :name="2"
+                  img-src="https://cdn.quasar.dev/img/parallax1.jpg"
+                />
+                <q-carousel-slide
+                  :name="3"
+                  img-src="https://cdn.quasar.dev/img/parallax2.jpg"
+                />
+                <q-carousel-slide
+                  :name="4"
+                  img-src="https://cdn.quasar.dev/img/quasar.jpg"
+                />
               </q-carousel>
             </q-card-section>
           </q-card>
@@ -92,10 +104,22 @@
               thumbnails
               infinite
             >
-              <q-carousel-slide :name="1" :img-src="phone.imagen[0]" />
-              <q-carousel-slide :name="2" :img-src="phone.imagen[1]" />
-              <q-carousel-slide :name="3" :img-src="phone.imagen[2]" />
-              <q-carousel-slide :name="4" :img-src="phone.imagen[3]" />
+              <q-carousel-slide
+                :name="1"
+                img-src="https://cdn.quasar.dev/img/mountains.jpg"
+              />
+              <q-carousel-slide
+                :name="2"
+                img-src="https://cdn.quasar.dev/img/parallax1.jpg"
+              />
+              <q-carousel-slide
+                :name="3"
+                img-src="https://cdn.quasar.dev/img/parallax2.jpg"
+              />
+              <q-carousel-slide
+                :name="4"
+                img-src="https://cdn.quasar.dev/img/quasar.jpg"
+              />
             </q-carousel>
           </q-card-section>
         </q-card>
@@ -166,8 +190,10 @@
   <router-view />
 </template>
 <script>
-import telefonos from 'src/components/telefonos.ts';
 import { ref } from 'vue';
+import { db } from 'src/boot/firebase';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+
 export default {
   methods: {
     Inicio() {
@@ -185,21 +211,24 @@ export default {
   data() {
     return {
       phone: null,
+      modelo: null,
     };
   },
   created() {
-    const phoneIndex = parseInt(this.$route.params.telefono);
+    this.modelo = this.$route.params.telefono;
+    const anunciosCollection = collection(db, 'anuncios');
+    const q = query(anunciosCollection, where('modelo', '==', this.modelo));
 
-    if (
-      !isNaN(phoneIndex) &&
-      phoneIndex >= 0 &&
-      phoneIndex < telefonos.phones.length
-    ) {
-      this.phone = telefonos.phones[phoneIndex];
-    } else {
-      console.error(`Índice de teléfono inválido: ${phoneIndex}`);
-    }
+    getDocs(q)
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          this.phone = doc.data();
+          console.log('Documento encontrado:', doc.data());
+        });
+      })
+      .catch((error) => {
+        console.error('Error al buscar en Firebase:', error);
+      });
   },
 };
 </script>
-<style></style>

@@ -58,13 +58,13 @@
         :key="index"
         v-ripple
         class="q-card q-mb-xs col-12 col-sm-6 col-md-3 col-lg-2 my-box cursor-pointer q-hoverable"
-        @click="VerDetalles(index)"
+        @click="VerDetalles(phone.modelo)"
       >
         <span class="q-focus-helper"></span>
         <!-- Imagen de la tarjeta -->
         <q-card-section>
           <q-img
-            :src="phone.imagen[0]"
+            src="https://cdn.quasar.dev/img/mountains.jpg"
             class="q-pa-md"
             style="height: 200px; padding: 10px; overflow: hidden"
           >
@@ -106,13 +106,13 @@
 <script>
 import { ref, computed } from 'vue';
 import telefonos from 'src/components/telefonos.ts';
-
+import { db } from 'src/boot/firebase';
+import { collection } from 'firebase/firestore';
+import { useCollection } from 'vuefire';
 export default {
   methods: {
     VerDetalles(indice) {
-      const adjustedIndex = (this.PaginaActual - 1) * 6 + indice;
-
-      this.$router.push(`/DetallesTelefono/${adjustedIndex}`);
+      this.$router.push(`/DetallesTelefono/${indice}`);
     },
     cambiarPagina(pagina) {
       console.log('Página actual:', pagina);
@@ -126,14 +126,16 @@ export default {
     const itemsPorPagina = 6; // Cambia esto al número deseado de elementos por página
     const PaginaActual = ref(1);
 
+    const anuncios = useCollection(collection(db, 'anuncios'));
+
     const totalPaginas = computed(() => {
-      return Math.ceil(telefonos.phones.length / itemsPorPagina);
+      return Math.ceil(anuncios.value.length / itemsPorPagina);
     });
 
     const phonesPaginados = computed(() => {
       const startIndex = (PaginaActual.value - 1) * itemsPorPagina;
       const endIndex = startIndex + itemsPorPagina;
-      return telefonos.phones.slice(startIndex, endIndex);
+      return anuncios.value.slice(startIndex, endIndex);
     });
 
     return {
@@ -146,6 +148,7 @@ export default {
       PaginaActual,
       totalPaginas,
       phonesPaginados,
+      anuncios,
     };
   },
 };
