@@ -5,6 +5,9 @@
         <div class="col">
           <q-card>
             <q-card-section>
+              <div v-if="TaCargando" class="text-center">
+                <p>Cargando imágenes...</p>
+              </div>
               <q-carousel
                 swipeable
                 animated
@@ -13,22 +16,10 @@
                 thumbnails
                 infinite
               >
-                <q-carousel-slide
-                  :name="1"
-                  img-src="https://cdn.quasar.dev/img/mountains.jpg"
-                />
-                <q-carousel-slide
-                  :name="2"
-                  img-src="https://cdn.quasar.dev/img/parallax1.jpg"
-                />
-                <q-carousel-slide
-                  :name="3"
-                  img-src="https://cdn.quasar.dev/img/parallax2.jpg"
-                />
-                <q-carousel-slide
-                  :name="4"
-                  img-src="https://cdn.quasar.dev/img/quasar.jpg"
-                />
+                <q-carousel-slide :name="1" :img-src="urlImagens[0]" />
+                <q-carousel-slide :name="2" :img-src="urlImagens[1]" />
+                <q-carousel-slide :name="3" :img-src="urlImagens[2]" />
+                <q-carousel-slide :name="4" :img-src="urlImagens[3]" />
               </q-carousel>
             </q-card-section>
           </q-card>
@@ -104,22 +95,10 @@
               thumbnails
               infinite
             >
-              <q-carousel-slide
-                :name="1"
-                img-src="https://cdn.quasar.dev/img/mountains.jpg"
-              />
-              <q-carousel-slide
-                :name="2"
-                img-src="https://cdn.quasar.dev/img/parallax1.jpg"
-              />
-              <q-carousel-slide
-                :name="3"
-                img-src="https://cdn.quasar.dev/img/parallax2.jpg"
-              />
-              <q-carousel-slide
-                :name="4"
-                img-src="https://cdn.quasar.dev/img/quasar.jpg"
-              />
+              <q-carousel-slide :name="1" :img-src="urlImagens[0]" />
+              <q-carousel-slide :name="2" :img-src="urlImagens[1]" />
+              <q-carousel-slide :name="3" :img-src="urlImagens[2]" />
+              <q-carousel-slide :name="4" :img-src="urlImagens[3]" />
             </q-carousel>
           </q-card-section>
         </q-card>
@@ -191,8 +170,9 @@
 </template>
 <script>
 import { ref } from 'vue';
-import { db } from 'src/boot/firebase';
+import { db, storage } from 'src/boot/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
+import { ref as refStorage, getDownloadURL, listAll } from 'firebase/storage';
 
 export default {
   methods: {
@@ -212,6 +192,9 @@ export default {
     return {
       phone: null,
       modelo: null,
+      Id: null,
+      urlImagens: [],
+      TaCargando: true,
     };
   },
   created() {
@@ -220,10 +203,25 @@ export default {
     const q = query(anunciosCollection, where('modelo', '==', this.modelo));
 
     getDocs(q)
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
+      .then(async (querySnapshot) => {
+        querySnapshot.forEach(async (doc) => {
           this.phone = doc.data();
+          this.Id = doc.id;
           console.log('Documento encontrado:', doc.data());
+
+          const imageCarpetaRef = refStorage(storage, `anuncios/${this.Id}`);
+
+          const imagenes = await listAll(imageCarpetaRef);
+
+          const imageUrls = await Promise.all(
+            imagenes.items.map(async (imageRef) => {
+              return getDownloadURL(imageRef);
+            })
+          );
+
+          this.urlImagens = imageUrls;
+          this.TaCargando = false;
+          console.log('URL de las imágenes:', this.urlImagens);
         });
       })
       .catch((error) => {
