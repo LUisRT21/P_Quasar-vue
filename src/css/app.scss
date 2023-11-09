@@ -1,78 +1,39 @@
 // app global css in SCSS form
-/*.container {
-  display: flex;
-  flex-wrap: wrap;
+.contenedor {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+  grid-gap: 5px;
   width: 100%;
-  left: 0;
-}*/
+}
 
-/*.card {
-  flex: 0 0 calc(25% - 14px);
-  margin-bottom: 10px;
-  width: 100%;
+.card {
   background-color: #fff0ff;
   transition: transform 0.3s;
-}*/
-/*.card-content {
-  height: 100%;
-}*/
+  max-width: 300px; /* Tamaño máximo deseado */
+}
+.contenedor-chi {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px; /* Espacio entre las tarjetas */
+}
+
+.card-chi {
+  background-color: #fff0ff;
+  transition: transform 0.3s;
+  flex: 0 0 calc(50% - 10px); /* 2 tarjetas por fila inicialmente */
+  max-width: calc(50% - 10px); /* Tamaño máximo de cada tarjeta */
+  margin-bottom: 10px;
+}
+@media (max-width: 750px) {
+  .card-chi {
+    flex: 0 0 calc(100% - 10px); /* 1 tarjeta por fila en pantallas más pequeñas */
+    max-width: calc(
+      100% - 15px
+    ); /* Tamaño máximo de cada tarjeta en pantallas más pequeñas */
+  }
+}
 /*.card:hover {
   transform: scale(1.05);
-}*/
-/*.dollar-card {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #f1d7ff;
-}*/
-
-/*.custom-card {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}*/
-
-/*.informacion-card {
-  margin-top: 0;
-  width: 500px;
-  height: 350px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #ffdfff;
-  border: 1px solid black;
-}*/
-
-/*.boton-cerrar {
-  position: absolute;
-  top: 1px;
-  right: 1px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  width: 2px;
-  height: 2px;
-}*/
-
-/*.card-extra {
-  width: 100%;
-  left: 0;
-}*/
-/*.caracteristicas-verticales {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}*/
-/*.caracteristicas-verticales q-list-item {
-  width: 100%;
-  display: flex;
-  align-items: center;
-}*/
-/*.boton-carrito {
-  position: absolute;
-  right: 60px;
-  top: 1px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
 }*/
