@@ -237,7 +237,7 @@ export default {
     const single = ref(null);
     const multiple = ref(null);
     const options = ['Precio', 'Fecha'];
-    const itemsPerPage = 6;
+    const itemsPerPage = 8;
     const PaginaActual = ref(1);
     const anuncios = useCollection(collection(db, 'anuncios'));
     const totalPaginas = computed(() => {
@@ -246,6 +246,8 @@ export default {
     const phonesPaginados = computed(() => {
       const startIndex = (PaginaActual.value - 1) * itemsPerPage;
       const endIndex = startIndex + itemsPerPage;
+      const paginados = anuncios.value.slice(startIndex, endIndex);
+      console.log('phonesPaginados:', paginados);
       return anuncios.value.slice(startIndex, endIndex);
     });
     const phoneIds = computed(() => {
@@ -255,37 +257,45 @@ export default {
     const phoneImages = ref([]);
 
     const obtenerPrimeraImagen = async (phoneId) => {
-      if (phoneId) {
-        const imageCarpetaRef = refStorage(storage, `anuncios/${phoneId}`);
-        try {
-          const imagenes = await listAll(imageCarpetaRef);
-          if (imagenes.items.length > 0) {
-            const firstImageRef = imagenes.items[0];
-            const firstImageUrl = await getDownloadURL(firstImageRef);
-            return firstImageUrl;
-          } else {
-            console.error('No se encontraron imágenes en la carpeta.');
-            return null;
-          }
-        } catch (error) {
-          console.error('Error al obtener la URL de la imagen:', error);
+      if (!phoneId) {
+        console.error('No se pudo obtener el ID del teléfono.');
+        return null;
+      }
+
+      const imageCarpetaRef = refStorage(storage, `anuncios/${phoneId}`);
+      try {
+        const imagenes = await listAll(imageCarpetaRef);
+        if (imagenes.items.length > 0) {
+          const firstImageRef = imagenes.items[0];
+          const firstImageUrl = await getDownloadURL(firstImageRef);
+          console.log('URL de la primera imagen:', firstImageUrl);
+          return firstImageUrl;
+        } else {
+          console.error('No se encontraron imágenes en la carpeta.');
           return null;
         }
-      } else {
-        console.error('No se pudo obtener el ID del teléfono.');
+      } catch (error) {
+        console.error('Error al obtener la URL de la imagen:', error);
         return null;
       }
     };
 
     const loadImages = async () => {
-      const imagePromises = phoneIds.value.map((phoneId) =>
-        obtenerPrimeraImagen(phoneId)
-      );
-      phoneImages.value = await Promise.all(imagePromises);
+      console.log('Cargando imágenes...');
+      console.log('phoneIds:', phoneIds.value);
+
+      try {
+        const imagePromises = phoneIds.value.map((phoneId) =>
+          obtenerPrimeraImagen(phoneId)
+        );
+        phoneImages.value = await Promise.all(imagePromises);
+        console.log('phoneImages (después de carga):', phoneImages.value);
+      } catch (error) {
+        console.error('Error al cargar las imágenes:', error);
+      }
     };
 
     onMounted(loadImages);
-
     watch(phonesPaginados, () => {
       loadImages();
     });
