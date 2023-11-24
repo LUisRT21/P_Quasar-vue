@@ -163,11 +163,17 @@
               />
             </q-card-section>
           </q-card-section>
+          <!-- Agregado: Sección para mostrar los inputs de precio -->
+          <q-card-section v-if="multiple && multiple.includes('Precio')">
+            <q-input prefix="$" label="Precio:" v-model="precio" outlined />
+            <q-input prefix="$" label="hasta:" v-model="hasta" outlined />
+          </q-card-section>
         </q-card>
       </div>
+
       <div class="contenedor-chi">
         <q-card
-          v-for="(phone, index) in filteredPhones"
+          v-for="(phone, index) in phonesPaginados"
           :key="index"
           v-ripple
           class="card my-box cursor-pointer q-hoverable"
