@@ -159,6 +159,7 @@
                 multiple
                 :options="options"
                 style="width: 100%"
+                @input="handleSortChange"
               />
             </q-card-section>
           </q-card-section>
@@ -166,10 +167,10 @@
       </div>
       <div class="contenedor-chi">
         <q-card
-          v-for="(phone, index) in phonesPaginados"
+          v-for="(phone, index) in filteredPhones"
           :key="index"
           v-ripple
-          class="card-chi my-box cursor-pointer q-hoverable"
+          class="card my-box cursor-pointer q-hoverable"
           @click="VerDetalles(phone.modelo)"
         >
           <span class="q-focus-helper"></span>
@@ -239,17 +240,57 @@ export default {
     const options = ['Precio', 'Fecha'];
     const itemsPerPage = 8;
     const PaginaActual = ref(1);
+    const precio = ref('');
+    const hasta = ref('');
     const anuncios = useCollection(collection(db, 'anuncios'));
+
     const totalPaginas = computed(() => {
       return Math.ceil(anuncios.value.length / itemsPerPage);
     });
+
     const phonesPaginados = computed(() => {
-      const startIndex = (PaginaActual.value - 1) * itemsPerPage;
-      const endIndex = startIndex + itemsPerPage;
-      const paginados = anuncios.value.slice(startIndex, endIndex);
-      console.log('phonesPaginados:', paginados);
-      return anuncios.value.slice(startIndex, endIndex);
+      let result = anuncios.value.slice(
+        (PaginaActual.value - 1) * itemsPerPage,
+        PaginaActual.value * itemsPerPage
+      );
+
+      // Filtrar por precio
+      if (precio.value !== '' && result) {
+        result = result.filter(
+          (phone) =>
+            phone &&
+            phone.precio !== undefined &&
+            parseFloat(phone.precio) >= parseFloat(precio.value)
+        );
+      }
+
+      if (hasta.value !== '' && result) {
+        result = result.filter(
+          (phone) =>
+            phone &&
+            phone.precio !== undefined &&
+            parseFloat(phone.precio) <= parseFloat(hasta.value)
+        );
+      }
+
+      // Ordenar
+      if (multiple.value && multiple.value.length > 0) {
+        if (multiple.value.includes('Precio')) {
+          result.sort((a, b) =>
+            a.precio !== undefined && b.precio !== undefined
+              ? a.precio - b.precio
+              : 0
+          );
+        }
+
+        if (multiple.value.includes('Fecha')) {
+          // Agrega tu lógica de ordenamiento por fecha si es necesario
+        }
+      }
+
+      return result;
     });
+
     const phoneIds = computed(() => {
       return phonesPaginados.value.map((phone) => phone.id);
     });
@@ -304,8 +345,8 @@ export default {
       single,
       multiple,
       options,
-      precio: '',
-      hasta: '',
+      precio,
+      hasta,
       PaginaActual,
       totalPaginas,
       phonesPaginados,
@@ -315,6 +356,7 @@ export default {
   },
 };
 </script>
+
 <style>
 .paginado {
   position: fixed;

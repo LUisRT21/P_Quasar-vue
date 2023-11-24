@@ -225,6 +225,14 @@ export function MainLayoutScript() {
         label: 'Xiaomi',
         value: 'op5',
       },
+      {
+        label: 'OnePlus',
+        value: 'op6',
+      },
+      {
+        label: 'Pixel',
+        value: 'op7',
+      },
     ],
 
     opcionesGrupo2: [

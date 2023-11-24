@@ -99,7 +99,12 @@
     <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered>
       <scroll-area class="fit">
         <div class="q-pa-md q-gutter-lg">
-          <q-toggle v-model="value" color="primary" label="Nuevo" />
+          <q-toggle
+            v-model="value"
+            color="primary"
+            label="Nuevo"
+            @input="handleOptionSelected('Nuevo', value)"
+          />
         </div>
         <q-card class="my-card">
           <q-card-section>
@@ -110,6 +115,7 @@
                 :options="opcionesGrupo1"
                 color="secondary"
                 type="checkbox"
+                @input="handleOptionSelected('Marca', group1)"
               ></q-option-group>
             </div>
           </q-card-section>
@@ -123,6 +129,7 @@
                 :options="opcionesGrupo2"
                 color="primary"
                 type="checkbox"
+                @input="handleOptionSelected('Sistema', group2)"
               ></q-option-group>
             </div>
           </q-card-section>
@@ -136,6 +143,7 @@
                 :options="opcionesGrupo3"
                 color="secondary"
                 type="checkbox"
+                @input="handleOptionSelected('Pantalla', grupo3)"
               ></q-option-group>
             </div>
           </q-card-section>
