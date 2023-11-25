@@ -210,6 +210,7 @@
         </q-card>
       </div>
     </div>
+
     <q-pagination
       v-model="PaginaActual"
       :min="1"
@@ -244,7 +245,7 @@ export default {
     const single = ref(null);
     const multiple = ref(null);
     const options = ['Precio', 'Fecha'];
-    const itemsPerPage = 6;
+    const itemsPerPage = 5;
     const PaginaActual = ref(1);
     const precio = ref('');
     const hasta = ref('');
@@ -366,7 +367,7 @@ export default {
 <style>
 .paginado {
   position: fixed;
-  bottom: 10;
+  bottom: 50px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
