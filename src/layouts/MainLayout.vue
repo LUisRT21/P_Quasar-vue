@@ -99,12 +99,7 @@
     <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered>
       <scroll-area class="fit">
         <div class="q-pa-md q-gutter-lg">
-          <q-toggle
-            v-model="value"
-            color="primary"
-            label="Nuevo"
-            @input="handleOptionSelected('Nuevo', value)"
-          />
+          <q-toggle v-model="value" color="primary" label="Nuevo" />
         </div>
         <q-card class="my-card">
           <q-card-section>
@@ -115,7 +110,6 @@
                 :options="opcionesGrupo1"
                 color="secondary"
                 type="checkbox"
-                @input="handleOptionSelected('Marca', group1)"
               ></q-option-group>
             </div>
           </q-card-section>
@@ -129,7 +123,6 @@
                 :options="opcionesGrupo2"
                 color="primary"
                 type="checkbox"
-                @input="handleOptionSelected('Sistema', group2)"
               ></q-option-group>
             </div>
           </q-card-section>
@@ -143,7 +136,6 @@
                 :options="opcionesGrupo3"
                 color="secondary"
                 type="checkbox"
-                @input="handleOptionSelected('Pantalla', grupo3)"
               ></q-option-group>
             </div>
           </q-card-section>
@@ -172,6 +164,17 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+
+    <q-footer elevated class="bg-primary text-white">
+      <q-toolbar>
+        <!-- Contenido del pie de página, por ejemplo: -->
+        <p>
+          Luis Israel Ramos Barahona RB20021 | Roberto Gadiel Vides Pérez
+          VP21002
+        </p>
+        <!-- ... Agrega más contenido según sea necesario ... -->
+      </q-toolbar>
+    </q-footer>
   </q-layout>
 </template>
 
