@@ -244,7 +244,7 @@ export default {
     const single = ref(null);
     const multiple = ref(null);
     const options = ['Precio', 'Fecha'];
-    const itemsPerPage = 8;
+    const itemsPerPage = 6;
     const PaginaActual = ref(1);
     const precio = ref('');
     const hasta = ref('');
@@ -366,7 +366,7 @@ export default {
 <style>
 .paginado {
   position: fixed;
-  bottom: 0;
+  bottom: 10;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
