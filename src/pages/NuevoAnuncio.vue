@@ -192,18 +192,53 @@
           />
           <div class="q-pa-md q-gutter-sm">
             <q-btn
-              @click="limpiarCampos"
+              @click="mostrarDialogoCancelar"
               color="primary"
               icon="cancel"
               label="Cancelar"
             />
             <q-btn
-              @click="agregarAnuncio"
+              @click="mostrarDialogoGuardar"
               color="primary"
               icon="ion-save"
               label="Guardar"
             />
           </div>
+          <q-dialog v-model="alert" ref="alertDialog">
+            <q-card>
+              <q-card-section> </q-card-section>
+
+              <q-card-section class="q-pt-none">
+                ¿Está seguro de que desea eliminar todos los campos?
+              </q-card-section>
+
+              <q-card-actions align="right">
+                <q-btn flat label="OK" color="primary" @click="limpiarCampos" />
+              </q-card-actions>
+            </q-card>
+          </q-dialog>
+
+          <q-dialog v-model="confirm" ref="confirmDialog">
+            <q-card>
+              <q-card-section> </q-card-section>
+
+              <q-card-section class="q-pt-none">
+                ¿Está seguro de que desea guardar todos los cambios?
+                <br />
+                <strong>NOTA:</strong> Todos los campos deben estar completados,
+                sino no se guardará el anuncio.
+              </q-card-section>
+
+              <q-card-actions align="right">
+                <q-btn
+                  flat
+                  label="OK"
+                  color="primary"
+                  @click="agregarAnuncio"
+                />
+              </q-card-actions>
+            </q-card>
+          </q-dialog>
         </div>
 
         <q-card
@@ -304,13 +339,26 @@ import { Loading } from 'quasar';
 export default {
   setup() {
     const images = ref([]);
-
+    const alert = ref(false);
+    const confirm = ref(false);
     const selectedImageIndex = ref(null);
     const selectedImageUrl = ref(null);
     const slide = ref(1);
     const group = ref();
     const sistema = ref();
     const anunciosURL = ref([]);
+    const mostrarDialogoCancelar = () => {
+      alert.value = true;
+    };
+    const cerrarDialogoCancelar = () => {
+      alert.value = false;
+    };
+    const mostrarDialogoGuardar = () => {
+      confirm.value = true;
+    };
+    const cerrarDialogoGuardar = () => {
+      confirm.value = false;
+    };
     const options = [
       {
         label: 'Nuevo',
@@ -415,6 +463,7 @@ export default {
     };
 
     const limpiarCampos = () => {
+      cerrarDialogoCancelar();
       images.value = [];
       titulo.value = '';
       vendedor.value = '';
@@ -558,6 +607,12 @@ export default {
     };
 
     return {
+      alert,
+      confirm,
+      mostrarDialogoGuardar,
+      cerrarDialogoGuardar,
+      mostrarDialogoCancelar,
+      cerrarDialogoCancelar,
       anunciosURL,
       selectedImageUrl,
       limpiarCampos,
